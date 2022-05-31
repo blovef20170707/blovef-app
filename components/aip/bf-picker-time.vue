@@ -1,15 +1,22 @@
 <!-- 地区 -->
 <template>
 	<view>
-		<u-form-item :label-position="labelPosition" :label="control.control_name" :label-width="labelWidth">
-			<u-input input-align="right" :border="border" type="select" :select-open="pickerShow" v-model="timeValue"
-				:placeholder="`请选择${control.control_name}`" @click="pickerShow = true"></u-input>
+		<u-form-item :label="control.control_name" borderBottom @click="pickerShow = true; hideKeyboard()">
+			<u--input v-model="timeValue" disabled disabledColor="#ffffff" :placeholder="`请选择${control.control_name}`"
+				border="none">
+			</u--input>
+			<u-icon slot="right" name="arrow-right"></u-icon>
 		</u-form-item>
-		<u-picker mode="time" v-model="pickerShow" @confirm="timeConfirm" :params="params"></u-picker>
+		<u-datetime-picker :mode="mode" :show="pickerShow" :value="timeValue" closeOnClickOverlay 
+			@confirm="timeConfirm" @cancel="timeClose" @close="timeClose"></u-datetime-picker>
 	</view>
 </template>
 
 <script>
+	import frame from '@/common/frame.js';
+	import {
+		apiSetControlContext
+	} from '@/common/http.api.js';
 	export default {
 		name: "bf-picker-time",
 		props: {
@@ -21,38 +28,49 @@
 				labelPosition: 'left',
 				border: false,
 				pickerShow: false,
-				timeValue:this.control.controlVO.value,
-				params: this.control.controlVO.format
+				timeValue: this.control.controlVO.value,
+				format: this.control.controlVO.format,
+				mode: 'datetime'
 			}
+		},
+		onReady() {
+			console.log("ready");
 		},
 		onLoad() {
 
 		},
 		methods: {
+			hideKeyboard() {
+				uni.hideKeyboard();
+			},
+			timeClose() {
+				this.pickerShow = false
+			},
 			//选择地区回调
 			timeConfirm(e) {
-				if(this.control.controlVO.valueBatchSave){
+				console.log(e.value);
+				console.log(this.timeValue);
+				if(e.value == this.timeValue){
+					this.pickerShow = false
 					return;
 				}
-				console.log("timeConfirm:",e)
-				let time = e.year+"-"+e.month+"-"+e.day+" "+e.hour+":"+e.minute;
+				let value =  frame.getTimeValue(this.mode,e.value);
+				if (this.control.controlVO.valueBatchSave) {
+					return;
+				}
 				var params = {
-					"control_no":this.control.control_no,
-					"value":time,
-					"valueSource":this.control.controlVO.valueSource
+					"control_no": this.control.control_no,
+					"value": value,
+					"valueSource": this.control.controlVO.valueSource
 				}
 				console.log("params:", params);
-				this.$u.api.setControlContext(params).then(res => {
-					console.log("setControlContextStart:", res);
-					if(res.success){
-						this.timeValue = time;
-					}
-					this.$u.toast(res.message);
-				}).catch(res => {
-					console.log("setControlContextException:", res);
-					this.$u.toast("加载出错");
+				apiSetControlContext(params).then(data => {
+					console.log("setControlContext Success:", data);
+					this.timeValue = value;
+				}).catch(exception => {
+					console.log("setControlContext exception:", exception);
 				}).finally(res => {
-					console.log("setControlContextEnd");
+					this.pickerShow = false
 				})
 			},
 		}

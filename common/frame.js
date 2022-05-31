@@ -1,3 +1,12 @@
+import {
+	apiCreateInstance,
+	apiGetControlContext,
+	apiGetPageContext,
+	apiSetControlContext,
+	apiInitPageContext,
+	apiSetBatchControlContext,
+	apiNodeAction
+} from '@/common/http.api.js';
 const baseUrl = 'http://uniapp.dcloud.io';
 
 /**
@@ -31,12 +40,65 @@ const isNull = function(obj) {
 	}
 }
 
+const getHeader = function(header) {
+	const token = uni.getStorageSync('token');
+	const res = uni.getSystemInfoSync();
+	const accountInfo = uni.getAccountInfoSync();
+	header.token = token;
+	let information = {
+		"client_id": res.deviceId,
+		"device_type": "WECHAT",
+		"device_os": res.system,
+		"device_version": res.model,
+		"device_app": accountInfo.miniProgram.appId,
+		"coordinate_type": "0",
+		"longitude": "0.0",
+		"latitude": "0.0"
+	};
+	header.information = JSON.stringify(information);
+	return header;
+}
+
+
+const getTimeValue = function(mode,time) {
+	const timeFormat = uni.$u.timeFormat;
+	switch (mode) {
+		case 'datetime':
+			return timeFormat(time, 'yyyy-mm-dd hh:MM')
+		case 'date':
+			return timeFormat(time, 'yyyy-mm-dd')
+		case 'year-month':
+			return timeFormat(time, 'yyyy-mm')
+		case 'time':
+			return e.value
+		default:
+			return ''
+	}
+}
+
+/**
+ * 设置控件值
+ * @param {Object} params 
+ */
+const setControlValue = function(params) {
+	console.log("params:", params);
+	apiSetControlContext(params).then(data => {
+		console.log("setControlContext Success:", data);
+	}).catch(exception => {
+		console.log("setControlContext exception:", exception);
+	}).finally(res => {
+
+	})
+}
+
+
+
 /**
  * @param {Object} c_this
  * @param {Object} list
  * 初始化悬浮按钮数组
  */
-const initButton = function(c_this,list) {
+const initButton = function(c_this, list) {
 	c_this.buttonArray = [];
 	for (let button of list) {
 		c_this.buttonArray.push({
@@ -53,18 +115,15 @@ const initButton = function(c_this,list) {
  * @param {Object} c_params
  * 得到page上下文
  */
-const getPageContext = function(c_this,c_params) {
-	if(null == c_params){
+const getPageContext = function(c_this, c_params) {
+	if (null == c_params) {
 		return;
 	}
-	c_this.$u.api.getPageContext(c_params).then(res => {
-		console.log("getPageContextSuccess:", res);
-		if (res.success && null != res.data) {
-			c_this.pageContextData = res.data;
-		}
-	}).catch(res => {
-		console.log("getPageContextException:", res);
-		getApp().$resShow(c_this,res);
+	apiGetPageContext(c_params).then(data => {
+		console.log("getPageContext Success:", data);
+		c_this.pageContextData = data;
+	}).catch(exception => {
+		console.log("getPageContext Exception:", exception);
 	});
 }
 
@@ -74,26 +133,23 @@ const getPageContext = function(c_this,c_params) {
  * @param {Object} isInitButton
  * 子组件设置父组件的page上下文，以及是否加载子组件的悬浮按钮
  */
-const setParentPageContext = function(c_this,c_params,isInitButton) {
-	if(null == c_params){
+const setParentPageContext = function(c_this, c_params, isInitButton) {
+	if (null == c_params) {
 		return;
 	}
-	c_this.$u.api.getPageContext(c_params).then(res => {
-		console.log("getPageContextSuccess:", res);
-		if (res.success && null != res.data) {
-			c_this.$emit('setPageContext', res.data); 
-			if(isInitButton){
-				initButton(c_this,res.data.viewButtonVO.controlContextVOList);
-			}
+	apiGetPageContext(c_params).then(data => {
+		console.log("getPageContext Success:", data);
+		c_this.$emit('setPageContext', data);
+		if (isInitButton) {
+			initButton(c_this, data.viewButtonVO.controlContextVOList);
 		}
-	}).catch(res => {
-		console.log("getPageContextException:", res);
-		getApp().$resShow(c_this,res);
+	}).catch(exception => {
+		console.log("getPageContext Exception:", exception);
 	});
 }
 
-const nodeClick = function(c_this,node) {
-	console.log("nodeClick",node);
+const nodeClick = function(c_this, node) {
+	console.log("nodeClick", node);
 	c_this.$u.route({
 		url: '/pages/page/details',
 		params: {
@@ -108,7 +164,7 @@ const nodeClick = function(c_this,node) {
  * @param {Object} button
  * 按钮事件
  */
-const buttonClick = function(c_this,button) {
+const buttonClick = function(c_this, button) {
 	let type = button.controlVO.click;
 	let params = button.controlVO.parameter;
 	let route_path = button.controlVO.route_path;
@@ -129,98 +185,81 @@ const buttonClick = function(c_this,button) {
 		if (isNull(route_path)) {
 			route_path = '/pages/page/details';
 		}
-		c_this.$u.api.initPageContext(params).then(res => {
-			console.log("initPageContextStart:", res);
-			if (res.success && null != res.data) {
-				c_this.$u.route({
-					url: route_path,
-					params: {
-						params: JSON.stringify(res.data),
-						type: "GETPAGE"
-					},
-				});
-			}
-		}).catch(res => {
-			console.log("initPageContextException:", res);
-			getApp().$resShow(c_this, res);
+		apiInitPageContext(params).then(data => {
+			console.log("initPageContext Success:", data);
+			c_this.$u.route({
+				url: route_path,
+				params: {
+					params: JSON.stringify(data),
+					type: "GETPAGE"
+				},
+			});
+		}).catch(exception => {
+			console.log("initPageContext Exception:", exception);
 		})
 	} else if ("DISCARD" == type) {
 		params.control_no = button.control_no;
 		params.value = 2;
 		params.valueSource = button.controlVO.valueSource;
 		console.log("DISCARD params:", params);
-		c_this.$u.api.setControlContext(params).then(res => {
-			console.log("setControlContextStart:", res);
-			getApp().$resShow(c_this, res);
-			setParentPageContext(c_this,pageParams,true);
-		}).catch(res => {
-			console.log("setControlContextException:", res);
-			getApp().$resShow(c_this, res);
+		apiSetControlContext(params).then(data => {
+			console.log("setControlContext Success:", data);
+			setParentPageContext(c_this, pageParams, true);
+		}).catch(exception => {
+			console.log("setControlContext Exception:", exception);
 		})
 	} else if ("RECOVERY" == type) {
 		params.control_no = button.control_no;
 		params.value = 1;
 		params.valueSource = button.controlVO.valueSource;
 		console.log("RECOVERY params:", params);
-		c_this.$u.api.setControlContext(params).then(res => {
-			console.log("setControlContextStart:", res);
-			getApp().$resShow(c_this, res);
-			setParentPageContext(c_this,pageParams,true);
-		}).catch(res => {
-			console.log("setControlContextException:", res);
-			getApp().$resShow(c_this,res);
+		apiSetControlContext(params).then(data => {
+			console.log("setControlContext Success:", data);
+			setParentPageContext(c_this, pageParams, true);
+		}).catch(exception => {
+			console.log("setControlContext Exception:", exception);
 		})
 	} else if ("DEL" == type) {
 		params.control_no = button.control_no;
 		params.value = 3;
 		params.valueSource = button.controlVO.valueSource;
 		console.log("DEL params:", params);
-		c_this.$u.api.setControlContext(params).then(res => {
-			console.log("setControlContextStart:", res);
-			getApp().$resShow(c_this, res);
+		apiSetControlContext(params).then(data => {
+			console.log("setControlContext Success:", data);
 			c_this.getListByControl("search");
 		}).catch(res => {
-			console.log("setControlContextException:", res);
-			getApp().$resShow(c_this, res);
+			console.log("setControlContext Exception:", exception);
 		})
 	} else if ("BATCHSAVE" == type) {
-		c_this.$u.api.setBatchControlContext(params).then(res => {
-			console.log("setBatchControlContextStart:", res);
-			getApp().$resShow(c_this, res);
+		apiSetBatchControlContext(params).then(data => {
+			console.log("setBatchControlContext Success:", data);
 			c_this.getListByControl("search");
-		}).catch(res => {
-			console.log("setBatchControlContextException:", res);
-			getApp().$resShow(c_this, res);
+		}).catch(exception => {
+			console.log("setBatchControlContext Exception:", exception);
 		})
 	} else if ("NODE_SUBMIT" == type) {
 		console.log("NODE_SUBMIT params:", params);
-		c_this.$u.api.nodeAction(params).then(res => {
-			console.log("nodeActioStart:", res);
-			getApp().$resShow(c_this, res);
-			setParentPageContext(c_this,pageParams,true);
-		}).catch(res => {
-			console.log("nodeActioException:", res);
-			getApp().$resShow(c_this, res);
+		apiNodeAction(params).then(data => {
+			console.log("nodeActio Success:", data);
+			setParentPageContext(c_this, pageParams, true);
+		}).catch(exception => {
+			console.log("nodeActio Exception:", exception);
 		})
 	} else if ("NODE_OVERRULE" == type) {
 		console.log("NODE_OVERRULE params:", params);
-		c_this.$u.api.nodeAction(params).then(res => {
-			console.log("nodeActioStart:", res);
-			getApp().$resShow(c_this, res);
-			setParentPageContext(c_this,pageParams,true);
-		}).catch(res => {
-			console.log("nodeActioException:", res);
-			getApp().$resShow(c_this, res);
+		apiNodeAction(params).then(data => {
+			console.log("nodeActio Success:", data);
+			setParentPageContext(c_this, pageParams, true);
+		}).catch(exception => {
+			console.log("nodeActio Exception:", exception);
 		})
 	} else if ("NODE_TERMINATION" == type) {
 		console.log("NODE_TERMINATION params:", params);
-		c_this.$u.api.nodeAction(params).then(res => {
-			console.log("nodeActioStart:", res);
-			getApp().$resShow(c_this, res);
-			setParentPageContext(c_this,pageParams,true);
-		}).catch(res => {
-			console.log("nodeActioException:", res);
-			getApp().$resShow(c_this, res);
+		apiNodeAction(params).then(data => {
+			console.log("nodeActio Success:", data);
+			setParentPageContext(c_this, pageParams, true);
+		}).catch(exception => {
+			console.log("nodeActio Exception:", exception);
 		})
 	}
 }
@@ -233,5 +272,8 @@ export default {
 	buttonClick,
 	getPageContext,
 	initButton,
-	nodeClick
+	nodeClick,
+	setControlValue,
+	getHeader,
+	getTimeValue
 }

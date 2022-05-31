@@ -46,6 +46,7 @@
 		},
 		onLoad() {
 			console.log("onLoad")
+			console.log(uni.$u);
 		},
 		onShow() {
 			console.log("onShow")
@@ -56,11 +57,12 @@
 					"procdef_id": "1",
 					"procdef_version": 1
 				};
-				apiCreateInstance(params).then(res => {
-					this.$u.route({
+				apiCreateInstance(params).then(data => {
+					console.log(data);
+					uni.$u.route({
 						url: '/pages/page/details',
 						params: {
-							params: JSON.stringify(res.data.parameter),
+							params: JSON.stringify(data.parameter),
 							type: "GETPAGE"
 						},
 					});
@@ -85,11 +87,11 @@
 
 	.order {
 		width: 710rpx;
-		background-color: #efefef;
+		background-color: #ffffff;
 		border-radius: 20rpx;
 		box-sizing: border-box;
 		margin: 20rpx auto;
-		font-size: 28rpx;
+		// font-size: 28rpx;
 
 		.top {
 			width: 100%;
@@ -117,7 +119,7 @@
 	.centre {
 		text-align: center;
 		margin: 200rpx auto;
-		font-size: 32rpx;
+		// font-size: 32rpx;
 
 		image {
 			width: 164rpx;
@@ -127,7 +129,7 @@
 		}
 
 		.tips {
-			font-size: 24rpx;
+			// font-size: 24rpx;
 			color: #fa3534;
 			margin-top: 20rpx;
 		}

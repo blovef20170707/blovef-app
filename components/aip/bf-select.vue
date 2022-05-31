@@ -1,16 +1,21 @@
 <template>
 	<view>
-		<u-form-item :label-position="labelPosition" :label="control.control_name" :label-width="labelWidth"
-			prop="required">
-			<u-input input-align="right" :border="border" type="select" :select-open="selectShow"
-				v-model="selectLable" :placeholder="`请选择${control.control_name}`" @click="selectShow = true">
-			</u-input>
+		<u-form-item borderBottom :label="control.control_name" @click="selectShow = true; hideKeyboard()">
+			<u--input inputAlign="right" border="none" v-model="selectLable"
+				:placeholder="`请选择${control.control_name}`">
+			</u--input>
+			<u-icon slot="right" name="arrow-right"></u-icon>
 		</u-form-item>
-		<u-select mode="single-column" :list="selectList" v-model="selectShow" @confirm="selectConfirm"></u-select>
+		<u-action-sheet :show="selectShow" :actions="selectList" :placeholder="`请选择${control.control_name}`"
+			@close="selectShow = false" @select="selectConfirm"></u-action-sheet>
 	</view>
 </template>
 
 <script>
+	import frame from '@/common/frame.js';
+	import {
+		apiSetControlContext
+	} from '@/common/http.api.js';
 	export default {
 		name: "bf-select",
 		props: {
@@ -31,30 +36,29 @@
 
 		},
 		methods: {
+			hideKeyboard() {
+				uni.hideKeyboard()
+			},
 			selectConfirm(e) {
-				console.log("selectConfirm:",e)
-				this.selectValue = e[0].value;
-				if(this.control.controlVO.valueBatchSave){
-					this.selectLable = e[0].label;
+				console.log("selectConfirm:", e)
+				this.selectValue = e.value;
+				if (this.control.controlVO.valueBatchSave) {
+					this.selectLable = e.label;
 					return;
 				}
 				var params = {
-					"control_no":this.control.control_no,
-					"value":this.selectValue,
-					"valueSource":this.control.controlVO.valueSource
+					"control_no": this.control.control_no,
+					"value": this.selectValue,
+					"valueSource": this.control.controlVO.valueSource
 				}
 				console.log("params:", params);
-				this.$u.api.setControlContext(params).then(res => {
-					console.log("setControlContextStart:", res);
-					if(res.success){
-						this.selectLable = e[0].label;
-					}
-					this.$u.toast(res.message);
-				}).catch(res => {
-					console.log("setControlContextException:", res);
-					this.$u.toast("加载出错");
+				apiSetControlContext(params).then(data => {
+					console.log("setControlContext Success:", data);
+					this.selectLable = e.label;
+				}).catch(exception => {
+					console.log("setControlContext exception:", exception);
 				}).finally(res => {
-					console.log("setControlContextEnd");
+
 				})
 			}
 		}

@@ -76,8 +76,8 @@
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"height": "50px",
-		"fontSize": "10px",
+		"height": "40px",
+		"fontSize": "15px",
 		"iconWidth": "24px",
 		"spacing": "3px",
 		"list": [{
@@ -104,7 +104,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "blovef",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}

@@ -1,14 +1,15 @@
 <template>
 	<view>
-		<u-upload ref="bfUp" input-align="right" :action="action" :file-list="fileList" max-count="1"
-			:auto-upload="auto" :size-type="sizeType" :max-size="2 * 1024 * 1024" :form-data="formData"
-			:header="header">
+		<u-upload ref="bfUp" :action="action" :fileList="fileList" maxCount="1" :previewFullImage="true"
+			@afterRead="afterRead" :auto-upload="auto" :maxSize="2 * 1024 * 1024" :form-data="formData"
+			@delete="deleteItem">
 		</u-upload>
-<!-- 		<u-button @click="submit" type="success">提交上传</u-button> -->
+		<!-- 		<u-button @click="submit" type="success">提交上传</u-button> -->
 	</view>
 </template>
 
 <script>
+	import frame from '@/common/frame.js';
 	export default {
 		name: "bf-upload",
 		props: {
@@ -18,7 +19,7 @@
 			return {
 				labelWidth: "200",
 				labelPosition: 'left',
-				action: this.$u.http.config.baseUrl + "/page/uploadControlContext",
+				action: uni.$u.http.config.baseURL + "/page/uploadControlContext",
 				controlContent: "",
 				fileList: [],
 				sizeType: ['compressed'],
@@ -31,7 +32,7 @@
 		},
 		mounted: function() {
 			console.log("control:", this.control);
-			if(null != this.control.controlVO.value && "" != this.control.controlVO.value){
+			if (this.control?.controlVO?.value) {
 				this.fileList.push({
 					url: this.control.controlVO.value,
 				});
@@ -43,57 +44,54 @@
 			this.formData = {
 				"setControlVO": JSON.stringify(setControlVO)
 			};
+			console.log(this.formData);
 		},
 		methods: {
-			submit() {
-				// this.$refs.bfUp.upload();
-				// console.log(this.$refs.bfUp.lists);
-				// console.log("uplists",item);
-				this.$refs.bfUp.lists.map(item => {
-					console.log(item);
-					if (item.file) {
-						uni.uploadFile({
-							url: this.$u.http.config.baseUrl +
-								"/page/uploadControlContext", 
-							filePath: item.file.path,
-							name: 'file',
-							formData: {
-								"control": JSON.stringify(this.control)
-							},
-							header: {
-								"Content-Type": "multipart/form-data"
-							},
-							success: (uploadFileRes) => {
-								console.log("uploadFileRes:", uploadFileRes)
-								if (uploadFileRes.statusCode == 200) {
-									let data = JSON.parse(uploadFileRes.data);
-									if (data.success == true) {
-										this.$u.toast("上传成功");
-									} else {
-										this.$u.toast("上传失败");
-									}
-								} else {
-									this.$u.toast("上传失败");
-								}
-							}
-						});
-					}
-				})
+			deleteItem(event) {
+				console.log(event);
+				this[`fileList${event.name}`].splice(event.index, 1)
+			},
 
+			async afterRead(event) {
+				// 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+				let lists = [].concat(event.file)
+				let fileListLen = this[`fileList${event.name}`].length
+				lists.map((item) => {
+					this[`fileList${event.name}`].push({
+						...item,
+						status: 'uploading',
+						message: '上传中'
+					})
+				})
+				for (let i = 0; i < lists.length; i++) {
+					const result = await this.uploadFilePromise(lists[i].url)
+					console.log(result);
+					let item = this[`fileList${event.name}`][fileListLen]
+					this[`fileList${event.name}`].splice(fileListLen, 1, Object.assign(item, {
+						status: 'success',
+						message: '',
+						url: result
+					}))
+					fileListLen++
+				}
 			},
-			afterRead(lists) {
-				console.log("lists", lists);
-				let uplists = [];
-				lists.map(item => {
-					if (item.file) {
-						this.submit(item);
-					}
+			uploadFilePromise(url) {
+				return new Promise((resolve, reject) => {		
+					let a = uni.uploadFile({
+						url: this.action,
+						filePath: url,
+						name: 'file',
+						formData: this.formData,
+						header: frame.getHeader(this.header),
+						success: (res) => {
+							console.log(res);
+							setTimeout(() => {
+								resolve(res.data.data)
+							}, 1000)
+						}
+					});
 				})
 			},
-			oversize() {
-				console.log("oversize")
-				// this.$u.toast("图片最大不能超过2M");
-			}
 		}
 	}
 </script>

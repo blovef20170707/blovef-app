@@ -1,12 +1,14 @@
 <template>
 	<view>
-		<u-form-item :label-position="labelPosition" :label="control.control_name" :label-width="labelWidth">
-			<u-input :type="inputType" @blur="setValue()" v-model="control.controlVO.value" input-align="right" :placeholder="`请输入${control.control_name}`"></u-input>
+		<u-form-item borderBottom :label="control.control_name">
+			<u--input :type="inputType" @blur="setValue()" v-model="control.controlVO.value" inputAlign="right"
+				border="none" :placeholder="`请输入${control.control_name}`"></u--input>
 		</u-form-item>
 	</view>
 </template>
 
 <script>
+	import frame from '@/common/frame.js';
 	export default {
 		name: "bf-input",
 		props: {
@@ -16,33 +18,27 @@
 		data() {
 			return {
 				labelWidth: "200",
-				labelPosition: 'left',
 				border: false,
 			}
 		},
 		onLoad() {
-
+			console.log("input onLoad:")
+		},
+		onShow() {
+			console.log("input onShow:")
 		},
 		methods: {
 			setValue(type) {
-				if(this.control.controlVO.valueBatchSave){
+				console.log("inputType:",this.inputType)
+				if (this.control.controlVO.valueBatchSave) {
 					return;
 				}
 				var params = {
-					"control_no":this.control.control_no,
-					"value":this.control.controlVO.value,
-					"valueSource":this.control.controlVO.valueSource
+					"control_no": this.control.control_no,
+					"value": this.control.controlVO.value,
+					"valueSource": this.control.controlVO.valueSource
 				}
-				console.log("params:", params);
-				this.$u.api.setControlContext(params).then(res => {
-					console.log("setControlContextStart:", res);
-					this.$u.toast(res.message);
-				}).catch(res => {
-					console.log("setControlContextException:", res);
-					this.$u.toast("加载出错");
-				}).finally(res => {
-					console.log("setControlContextEnd");
-				})
+				frame.setControlValue(params);
 			},
 		}
 	}

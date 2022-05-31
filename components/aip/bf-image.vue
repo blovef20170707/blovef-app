@@ -7,10 +7,9 @@
 			</view>
 		</view>
 		<view>
-			<u-image class="uimage" width="200rpx" height="200rpx" border-radius="10rpx" :src="control.controlVO.value"
-				mode="aspectFill" shape="circle">
-				<view slot="error" style="font-size: 24rpx;">{{tip}}</view>
-			</u-image>
+			<u--image class="uimage" width="80px" height="80px" :src="control.controlVO.value" shape="circle">
+				<view slot="error" style="font-size: 12px;">{{tip}}</view>
+			</u--image>
 		</view>
 	</view>
 </template>
@@ -30,12 +29,12 @@
 			}
 		},
 		mounted: function() {
-			this.tip = this.control.controlVO.value==''?"请上传图片":"加载失败";
+			this.tip = this.control.controlVO.value == '' ? "请上传图片" : "加载失败";
 		},
 		methods: {
 			upload() {
 				// 组件跳转组件不能传递参数，所以跳转的页面
-				this.$u.route({url: '/pages/page/upload', params: {
+				uni.$u.route({url:'/pages/page/upload', params: {
 					'control': JSON.stringify(this.control),
 					'detailsParams': JSON.stringify(this.detailsParams)
 				}});

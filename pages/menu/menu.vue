@@ -6,11 +6,11 @@
 					<text class="oneText">{{menu.menu_name}}</text>
 					<u-icon name="arrow-down"></u-icon>
 				</view>
-				<view>
+				<view class="menuItem">
 					<u-grid :col="3">
 						<block v-for="(mc, c_index) in menu.children" :key="c_index">
 							<u-grid-item @click="menuClick(mc.route_path,mc.route_params)">
-								<u-icon :name="mc.menu_img" :size="46"></u-icon>
+								<u-icon :name="mc.menu_img" :size="30"></u-icon>
 								<view class="grid-text">{{mc.menu_name}}</view>
 							</u-grid-item>
 						</block>
@@ -37,13 +37,10 @@
 		onShow() {
 			apiGetMenu({
 				"menu_client": 1
-			}).then(res => {
-				if (res.success && null != res.data) {
-					this.menuContext = res.data;
-				}
-			}).catch(res => {
-				console.log("getMenuException:", res);
-				this.$u.toast("加载出错");
+			}).then(data => {
+				this.menuContext = data;
+			}).catch(exception => {
+				console.log("getMenuException:", exception);
 			})
 		},
 		methods: {
@@ -53,7 +50,7 @@
 				if(frame.isNull(route_path)){
 					return;
 				}
-				this.$u.route(route_path, {
+				uni.$u.route(route_path, {
 					params: route_params
 				});
 			}
@@ -62,26 +59,28 @@
 </script>
 
 <style lang="scss">
-	
+	.menuItem {
+		// background-color: #ffffff;
+	}
 	.one {
 		width: 100%;
 		height: 46rpx;
 		margin-top: 4rpx;
-		background-color: #fafafa;
+		// background-color: #fafafa;
 	}
 	
 	.oneText {
-		font-size: 28rpx;
+		// font-size: 24rpx;
 	}
 	
 	.grid-text {
-		font-size: 28rpx;
+		// font-size: 28rpx;
 		margin-top: 4rpx;
 		color: $u-info;
 	}
 
 	.menu {
-		background-color: #ffffff;
+		// background-color: #ffffff;
 		color: #666666;
 		height: calc(100vh - var(--window-top));
 		width: 100%;

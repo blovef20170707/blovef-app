@@ -25,15 +25,17 @@ export function createApp() {
 
 import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
-
 uni.$u.setConfig({
 	config: {
 		// unit: 'rpx'
 	},
 	props: {
-		radio: {
-			// size: 15
-		}
+		// radio: {
+		// 	size: 8
+		// },
+		// text: {
+		// 	size : 8
+		// }
 	}
 })
 // 引入请求封装，将app参数传递到配置中

@@ -105,18 +105,17 @@
 									"wx_city": city
 								};
 								console.log(params);
-								apiWxLogin(params).then(res => {
-										console.log("成功登录",res)
-										uni.setStorageSync('token',res.token);
+								apiWxLogin(params).then(data => {
+										console.log("成功登录",data)
+										uni.setStorageSync('token',data.token);
 										console.log(uni.getStorageSync('token'))
 										uni.$u.route({
 											type: 'switchTab',
 											url: '/pages/index/index'
 										});
 										console.log("成功登录完成")
-								}).catch(res => {
-									console.log("exception",res)
-									uni.$u.toast("系统异常，请联系管理员")
+								}).catch(exception => {
+									console.log("exception",exception)
 								}).finally(res => {
 
 								})

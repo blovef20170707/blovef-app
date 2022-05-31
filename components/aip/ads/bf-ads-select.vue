@@ -1,12 +1,13 @@
 <template>
-	<view>
-		<u-form-item :label-position="labelPosition" :label="control.control_name" :label-width="labelWidth"
-			prop="required">
-			<u-input input-align="right" :border="border" type="select" :select-open="selectShow"
-				v-model="selectLable" :placeholder="`请选择${control.control_name}`" @click="selectShow = true">
-			</u-input>
+	<view style="width: 200px;">
+		<u-form-item borderBottom :label="control.control_name" :labelWidth="labelWidth"
+			@click="selectShow = true; hideKeyboard()">
+			<u--input v-model="selectLable" disabled disabledColor="#ffffff" :placeholder="`请选择${control.control_name}`"
+				border="none"></u--input>
+			<u-icon slot="right" name="arrow-right"></u-icon>
 		</u-form-item>
-		<u-select mode="single-column" :list="selectList" v-model="selectShow" @confirm="selectConfirm"></u-select>
+		<u-action-sheet :show="selectShow" :actions="selectList" :title="`请选择${control.control_name}`"
+			@close="selectShow = false" @select="selectConfirm"></u-action-sheet>
 	</view>
 </template>
 
@@ -25,23 +26,27 @@
 				selectList: this.control.data,
 				selectValue: '',
 				selectLable: '',
-				key:this.control.key
-				
+				key: this.control.key
+
 			}
 		},
 		onLoad() {
-			
+
 		},
 		methods: {
 			selectConfirm(e) {
-				this.selectValue = e[0].value;
-				this.selectLable = e[0].label;
+				console.log(e);
+				this.selectValue = e.value;
+				this.selectLable = e.label;
 				let json = {}
 				json.key = this.key;
 				json.value = this.selectValue;
-				json.operator = "0"; 
-				console.log("json:",json)
+				json.operator = "0";
+				console.log("json:", json)
 				this.$emit('setAdsJson', json);
+			},
+			hideKeyboard() {
+				uni.hideKeyboard()
 			}
 		}
 	}
