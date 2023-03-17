@@ -30,10 +30,10 @@
 				});
 			}else{
 				console.log("login");
-				uni.$u.route({
-					type: 'reLaunch',
-					url: '/pages/login/login'
-				});
+				// uni.$u.route({
+				// 	type: 'reLaunch',
+				// 	url: '/pages/login/login'
+				// });
 			}
 		},
 		onShow: function() {

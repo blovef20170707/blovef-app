@@ -8,6 +8,10 @@ let initPageContextUrl = '/page/initPageContext';
 let setBatchControlContextUrl = '/page/setBatchControlContext';
 let nodeActionUrl = '/api/v1/nodeAction';
 let getMenuUrl = '/sys/getMenu';
+let evaluationUrl = '/carSuit/evaluation';
+let evaluationReportUrl = '/carSuit/evaluationReport';
+let queryLoanArrayUrl = '/carSuit/queryLoan';
+
 
 // post请求
 export const apiWxLogin = (params, config = {}) => http.post(wxLoginUrl, params, config)
@@ -18,8 +22,9 @@ export const apiSetControlContext = (params, config = {custom: {toast: true}}) =
 export const apiInitPageContext = (params, config = {}) => http.post(initPageContextUrl, params, config)
 export const apiSetBatchControlContext = (params, config = {}) => http.post(setBatchControlContextUrl, params, config)
 export const apiNodeAction = (params, config = {custom: {toast: true}}) => http.post(nodeActionUrl, params, config)
-
-
+export const apiEvaluation = (params, config = {custom: {toast: false}}) => http.post(evaluationUrl, params, config)
+export const apiEvaluationReport = (params, config = {custom: {toast: false}}) => http.post(evaluationReportUrl, params, config)
+export const apiQueryLoanArray = (params, config = {custom: {toast: false}}) => http.post(queryLoanArrayUrl, params, config)
 // get请求 注意：get请求的配置等，都在第二个参数中，详见前面解释
 export const apiGetMenu = (data) => http.get(getMenuUrl, data)
 

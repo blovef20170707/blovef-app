@@ -5,7 +5,7 @@ import {
 	apiSetControlContext,
 	apiInitPageContext,
 	apiSetBatchControlContext,
-	apiNodeAction
+	apiNodeAction,
 } from '@/common/http.api.js';
 const baseUrl = 'http://uniapp.dcloud.io';
 
