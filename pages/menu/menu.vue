@@ -35,8 +35,9 @@
 
 		},
 		onShow() {
-			apiGetMenu({
-				"menu_client": 1
+			apiGetMenu({params:{
+				"menu_client": 1,
+				}
 			}).then(data => {
 				this.menuContext = data;
 			}).catch(exception => {

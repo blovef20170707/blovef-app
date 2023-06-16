@@ -28,7 +28,7 @@
         <template v-if="loading">
             <u-loading-icon
                 :mode="loadingMode"
-                :size="textSize * 1.15"
+                :size="loadingSize * 1.15"
                 :color="loadingColor"
             ></u-loading-icon>
             <text
@@ -75,7 +75,7 @@
         <template v-if="loading">
             <u-loading-icon
                 :mode="loadingMode"
-                :size="textSize * 1.15"
+                :size="loadingSize * 1.15"
                 :color="loadingColor"
             ></u-loading-icon>
             <text
@@ -313,12 +313,11 @@ $u-button-normal-font-size: 14px !default;
 $u-button-small-min-width: 60px !default;
 $u-button-small-height: 30px !default;
 $u-button-small-padding: 0px 8px !default;
-// $u-button-mini-padding: 0px 8px !default;原始感觉太大，自己修改
-$u-button-mini-padding: 0px 0px !default;
+$u-button-mini-padding: 0px 8px !default;
 $u-button-small-font-size: 12px !default;
 $u-button-mini-height: 22px !default;
 $u-button-mini-font-size: 10px !default;
-$u-button-mini-min-width: 30px !default;
+$u-button-mini-min-width: 50px !default;
 $u-button-disabled-opacity: 0.5 !default;
 $u-button-info-color: #323233 !default;
 $u-button-info-background-color: #fff !default;

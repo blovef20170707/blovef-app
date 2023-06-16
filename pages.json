@@ -1,9 +1,11 @@
 {
 	"easycom": {
-			"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
+		/**贷款
+		 *
+		 {
 			"path": "pages/car/index",
 			"style": {
 				"navigationBarTitleText": "车辆评估"
@@ -16,15 +18,40 @@
 			}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/car/evaluation",
+			"style": {
+				"navigationBarTitleText": "评估报告"
+			}
+		},
+		 */
+
+		{
+			"path": "pages/crrt/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
 		},
 		{
-			"path": "pages/car/evaluation",
+			"path": "pages/login/nopass",
 			"style": {
-				"navigationBarTitleText": "评估报告"
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		}, {
+			"path": "pages/me/me",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		}, {
+			"path": "pages/message/indexcard",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -34,89 +61,137 @@
 			}
 		},
 		{
-			"path": "pages/me/me",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		},
-		{
-			"path": "pages/message/message",
-			"style": {
-				"navigationBarTitleText": "消息",
-				"enablePullDownRefresh": true //开启下拉刷新
-			}
-		},
-		{
 			"path": "pages/menu/menu",
 			"style": {
 				"navigationBarTitleText": "菜单",
-				"enablePullDownRefresh": true //开启下拉刷新
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/page/list",
 			"style": {
 				"navigationBarTitleText": "列表",
-				"enablePullDownRefresh": true //开启下拉刷新
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/page/card",
 			"style": {
 				"navigationBarTitleText": "列表",
-				"enablePullDownRefresh": true //开启下拉刷新
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/page/card1",
 			"style": {
 				"navigationBarTitleText": "列表",
-				"enablePullDownRefresh": true //开启下拉刷新
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/page/details",
 			"style": {
 				"navigationBarTitleText": "详情",
-				"enablePullDownRefresh": true //开启下拉刷新
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/page/upload",
 			"style": {
 				"navigationBarTitleText": "上传列表",
-				"enablePullDownRefresh": true //开启下拉刷新
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/crrt/circle/index",
+			"style": {
+				"navigationBarTitleText": "圈子",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/crrt/study/index",
+			"style": {
+				"navigationBarTitleText": "学习"
+			}
+		},
+		{
+			"path": "pages/crrt/application/index",
+			"style": {
+				"navigationBarTitleText": "报名"
+			}
+		},
+		{
+			"path": "pages/crrt/guide/index",
+			"style": {
+				"navigationBarTitleText": "指南"
+			}
+		},
+		{
+			"path": "pages/crrt/feedback/index",
+			"style": {
+				"navigationBarTitleText": "调查问卷"
+			}
+		},
+		{
+			"path": "pages/crrt/feedback/info",
+			"style": {
+				"navigationBarTitleText": "调查问卷"
+			}
+		},
+		{
+			"path": "pages/crrt/examination/index",
+			"style": {
+				"navigationBarTitleText": "在线考试"
+			}
+		},
+		{
+			"path": "pages/crrt/examination/info",
+			"style": {
+				"navigationBarTitleText": "在线考试"
+			}
+		},
+		{
+			"path": "pages/crrt/examine/index",
+			"style": {
+				"navigationBarTitleText": "审批报名"
+			}
+		},
+		{
+			"path": "pages/crrt/feedback/open",
+			"style": {
+				"navigationBarTitleText": "开通反馈"
 			}
 		}
 	],
 	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#3cc51f",
-		"borderStyle": "black",
+		"color": "#7d7e7f",
+		"selectedColor": "#1296db",
+		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"height": "40px",
 		"fontSize": "15px",
 		"iconWidth": "24px",
 		"spacing": "3px",
 		"list": [{
-			"pagePath": "pages/index/index",
-			// "iconPath": "static/image/icon_component.png",
-			// "selectedIconPath": "static/image/icon_component_HL.png",
+			"pagePath": "pages/crrt/index/index",
+			"iconPath": "static/crrt/homeh.png",
+			"selectedIconPath": "static/crrt/homel.png",
 			"text": "首页"
 		}, {
-			"pagePath": "pages/menu/menu",
-			// "iconPath": "static/image/icon_API.png",
-			// "selectedIconPath": "static/image/icon_API_HL.png",
-			"text": "菜单"
+			"pagePath": "pages/crrt/study/index",
+			"iconPath": "static/crrt/studyh.png",
+			"selectedIconPath": "static/crrt/studyl.png",
+			"text": "学习"
 		}, {
-			"pagePath": "pages/message/message",
-			// "iconPath": "static/image/icon_API.png",
-			// "selectedIconPath": "static/image/icon_API_HL.png",
-			"text": "消息"
+			"pagePath": "pages/crrt/circle/index",
+			"iconPath": "static/crrt/circleh.png",
+			"selectedIconPath": "static/crrt/circlel.png",
+			"text": "圈子"
 		}, {
 			"pagePath": "pages/me/me",
-			// "iconPath": "static/image/icon_API.png",
-			// "selectedIconPath": "static/image/icon_API_HL.png",
+			"iconPath": "static/crrt/meh.png",
+			"selectedIconPath": "static/crrt/mel.png",
 			"text": "我的"
 		}]
 	},
@@ -124,6 +199,6 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "blovef",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#fafafa"
 	}
 }

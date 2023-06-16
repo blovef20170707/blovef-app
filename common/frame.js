@@ -8,7 +8,7 @@ import {
 	apiNodeAction,
 } from '@/common/http.api.js';
 const baseUrl = 'http://uniapp.dcloud.io';
-
+const appSystemKey = '2b8b0222-093b-11ee-8b05-fa163e97acdc';
 /**
  * 得到当期时间
  */
