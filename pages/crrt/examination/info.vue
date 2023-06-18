@@ -12,8 +12,8 @@
 							style="font-weight: bold;font-size: 13px;color: #e53e30;">温馨提示:记得交卷</text>
 					</view>
 					<view style="width: 25%;">
-						<view style="float: right;display: flex;padding-right: 5px">
-						<view><u-button v-if="disabled==false" text="交卷" size="mini" shape="circle" @click="end" color="#3f85ff"></u-button></view>
+						<view style="float: right;display: flex;">
+						<view><u-button v-if="disabled==false" text="交卷" size="mini" shape="circle" @click="show = true" color="#3f85ff"></u-button></view>
 						<view><text v-if="disabled==true" style="font-weight: bold;font-size: 13px;color:#3f85ff;">已交卷</text></view>
 						</view>
 					</view>
@@ -46,8 +46,10 @@
 				<view style="height: 10px;">
 				</view>
 			</view>
+			<u-modal :show="show"  content='是否确认交卷?' showCancelButton="true" @confirm="end()" @cancel="show=false"></u-modal>
+			<u-toast ref="uToast" />
 		</view>
-		<u-toast ref="uToast" />
+	
 	</view>
 </template>
 
@@ -61,6 +63,7 @@
 	export default {
 		data() {
 			return {
+				show: false,
 				verify:'回答错误!&ensp;&ensp;',
 				examination_id: '',
 				disabled: -1,
@@ -98,7 +101,7 @@
 				}).catch(exception => {
 					console.log("exception", exception)
 				}).finally(res => {
-
+					this.show = false;
 				})
 			},
 			queryCrrtTrainTraineeExamination() {
@@ -154,10 +157,10 @@
 		justify-content: center;
 		align-items: center;
 		flex-wrap: wrap;
-		// font-size: 12px;
+		font-size: 12px;
 		color: #7d7e7f;
 	}
-
+	
 	.container {
 		width: 97%;
 	}

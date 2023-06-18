@@ -8,6 +8,8 @@ let initPageContextUrl = '/page/initPageContext';
 let setBatchControlContextUrl = '/page/setBatchControlContext';
 let nodeActionUrl = '/api/v1/nodeAction';
 let getMenuUrl = '/sys/getMenu';
+let getMessageUrl = '/sys/getMessage';
+
 
 let evaluationUrl = '/carSuit/evaluation';
 let evaluationReportUrl = '/carSuit/evaluationReport';
@@ -32,6 +34,7 @@ let crrtTrainExaminationTopicUrl = '/crrt/train/trainee/examination/topic';
 let crrtTrainExaminationEndUrl = '/crrt/train/trainee/examination/end';
 let crrtTrainExamineUrl = '/crrt/train/examine';
 let crrtFeedBackOpenUrl = '/crrt/train/feedback/open';
+
 
 
 
@@ -71,6 +74,8 @@ export const apiCrrtTrainFeedBackCourse = (data) => http.get(crrtTrainFeedBackCo
 export const apiCrrtTrainSatisfaction = (data) => http.get(crrtTrainSatisfactionUrl, data)
 export const apiCrrtTrainExamination = (data) => http.get(crrtTrainExaminationUrl, data)
 export const apiCrrtTrainTraineeExamination = (data) => http.get(crrtTrainTraineeExaminationUrl, data)
+export const apiGetMessage = (data) => http.get(getMessageUrl, data)
+
 
 
 

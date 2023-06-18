@@ -16,7 +16,7 @@
 										<u--text :text="item.name" color="#000000" bold size="17"></u--text>
 									</view>
 									<view style="width: 25%;display: flex;float: right;color: #db87e9;">
-										<u-button text="关注" size="mini" shape="circle"
+										<u-button text="已关注" size="mini" shape="circle"
 											color="linear-gradient(to right, rgb(198, 201, 216), rgb(208, 142, 255))"></u-button>
 									</view>
 								</view>
@@ -30,9 +30,9 @@
 									<view style="width: 75%;"><text style="font-size: 14px;">{{item.time}}</text></view>
 									<view style="width: 25%;">
 										<view style="display: flex;float: right;">
-											<u-icon size="17" name="/static/crrt/pl.png"></u-icon>
+											<u-icon size="17" name="/static/crrt/pl.png" @click="pl()"></u-icon>
 											<view style="width: 15px;"></view>
-											<u-icon size="17" name="/static/crrt/dz.png"></u-icon>
+											<u-icon size="17" name="/static/crrt/dz.png" @click="pl()"></u-icon>
 										</view>
 									</view>
 								</view>
@@ -43,8 +43,9 @@
 					</view>
 				</view>
 			</view>
+			<u-toast ref="uToast"></u-toast>
 		</view>
-		<u-toast ref="uToast"></u-toast>
+		
 	</view>
 </template>
 
@@ -69,16 +70,16 @@
 		onShow() {
 			this.token = uni.getStorageSync('token');
 			console.log("onShow:" + this.token);
-			if (!this.token) {
-				uni.$u.route('/pages/login/nopass');
-			} else {
-				this.getCircle();
-			}
 		},
 		
 		methods: {
 			onTabItemTap() {
-				console.log("sss")
+				console.log('onTabItemTap');
+				if (!this.token) {
+					uni.$u.route('/pages/login/nopass');
+				} else {
+					this.getCircle();
+				}
 			},
 			getCircle() {
 				apiCrrtTrainCircleIndex({}).then(data => {
@@ -89,6 +90,12 @@
 				}).finally(res => {
 
 				})
+			},
+			pl(){
+				this.$refs.uToast.show({
+					message: '该功能开发中',
+					type: 'warning'
+				});
 			}
 		}
 	}

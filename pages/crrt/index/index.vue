@@ -12,12 +12,12 @@
 				<view style="height: 5px;"></view>
 				<view style="display: flex;height: 25px;">
 					<view style="width: 20%;">
-						<u--image src="/static/crrt/message1.png" width="25px" height="25px">
+						<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/message1.png" width="25px" height="25px">
 						</u--image>
 					</view>
 					<view
-						style="width: 75%;height:25px;text-align: left;display: flex;align-items: center;flex-wrap: wrap;">
-						<text style="font-size: 12px;">2023年理论培训授课安排一览表</text>
+						@click="timeable()" style="width: 75%;height:25px;text-align: left;display: flex;align-items: center;flex-wrap: wrap;">
+						<text  style="font-size: 12px;">2023年理论培训授课安排一览表</text>
 					</view>
 					<view style="width: 5%;height:25px;display: flex;align-items: center;flex-wrap: wrap;">
 						<u-icon name="arrow-right" size="12"></u-icon>
@@ -27,9 +27,9 @@
 					<view>
 						<view>
 							<u-grid :border="false" col="4">
-								<u-grid-item v-for="(item,index) in appList" :key="index"
+								<u-grid-item v-for="(item,index) in appList" :key="index" @click="appAction(item)"
 									customStyle="padding-top: 10px; padding-bottom: 10px">
-									<u--image @click="appAction(item)" :src="item.img" width="40px" height="40px">
+									<u--image :src="item.img" width="40px" height="40px">
 									</u--image>
 									<text class="grid-text">{{item.title}}</text>
 								</u-grid-item>
@@ -56,11 +56,11 @@
 					<view style="border-bottom:1px solid #d0d0d0" v-for="(item,index) in courseList" :key="index">
 						<view style="height: 5px;">
 						</view>
-						<view style="display: flex;">
+						<view style="display: flex;" @click="course()">
 							<view style="width: 2px;">
 							</view>
 							<view style="height:80px">
-								<u--image src="/static/crrt/kc.png" width="110px" height="80px" mode="scaleToFill">
+								<u--image :src="item.icon" width="110px" height="80px" mode="scaleToFill">
 								</u--image>
 							</view>
 							<view style="width: 10px;">
@@ -100,15 +100,15 @@
 					</view>
 				</view>
 			</view>
+			<u-toast ref="uToast"></u-toast>
 		</view>
-		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
 
 <script>
 	import frame from '@/common/frame.js';
 	import {
-		apiCrrtTrainIndex
+		apiCrrtTrainIndex,apiCrrtTrainTrainee
 	} from '@/common/http.api.js';
 	export default {
 		data() {
@@ -133,14 +133,38 @@
 		methods: {
 			appAction(item) {
 				console.log("item", item);
-				console.log("item", item);
 				if (!this.token) {
 					uni.$u.route('/pages/login/nopass');
 				} else {
-					uni.$u.route(item.url);
+					if (item.tag == 0) {
+						this.$refs.uToast.show({
+							message: '该功能开发中',
+							type: 'warning'
+						});
+					} else {
+						if(item.title == '报名入口'){
+							uni.$u.route(item.url);
+						}else{
+							apiCrrtTrainTrainee({}).then(data => {
+								console.log("学员", data)
+								if (data && data.trainee_status != 2) {
+									 this.$refs.uToast.show({
+									 	message: '请先报名,并等待审核通过',
+									 	type: 'warning'
+									 });
+								}else{
+									uni.$u.route(item.url);
+								}
+							}).catch(exception => {
+								console.log("exception", exception)
+							}).finally(res => {
+							
+							})
+						}
+					}
 				}
 			},
-			getIndex(){
+			getIndex() {
 				apiCrrtTrainIndex({}).then(data => {
 					console.log("首页加载", data)
 					this.banList = data.banList;
@@ -149,8 +173,18 @@
 				}).catch(exception => {
 					console.log("exception", exception)
 				}).finally(res => {
-				
+
 				})
+			},
+			timeable() {
+				console.log("test")
+				uni.$u.route('/pages/crrt/timeable/index');
+			},
+			course() {
+				this.$refs.uToast.show({
+					message: '该功能开发中',
+					type: 'warning'
+				});
 			}
 		}
 	}

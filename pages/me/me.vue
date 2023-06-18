@@ -79,9 +79,18 @@
 
 		},
 		onShow() {
-			this.queryTrainee();
+			this.token = uni.getStorageSync('token');
+			console.log("onShow:" + this.token);
 		},
 		methods: {
+			onTabItemTap() {
+				console.log('onTabItemTap');
+				if (!this.token) {
+					uni.$u.route('/pages/login/nopass');
+				} else {
+					this.queryTrainee();
+				}
+			},
 			queryTrainee() {
 				apiCrrtTrainTrainee({}).then(data => {
 					console.log("学员", data)
@@ -94,6 +103,12 @@
 
 				})
 			},
+			cellClick(){
+				this.$refs.uToast.show({
+					message: '该功能开发中',
+					type: 'warning'
+				});
+			}
 		}
 	}
 </script>

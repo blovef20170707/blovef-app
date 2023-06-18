@@ -162,6 +162,12 @@
 			"style": {
 				"navigationBarTitleText": "开通反馈"
 			}
+		},
+		{
+			"path": "pages/crrt/timeable/index",
+			"style": {
+				"navigationBarTitleText": "课表"
+			}
 		}
 	],
 	"tabBar": {

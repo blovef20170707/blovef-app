@@ -54,8 +54,9 @@
 					</view>
 				</view>
 			</view>
+			<u-toast ref="uToast" />
 		</view>
-		<u-toast ref="uToast" />
+		
 	</view>
 </template>
 

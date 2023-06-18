@@ -48,13 +48,15 @@
 										</view>
 										<view style="width: 25%;">
 											<view style="float: right;display: flex;padding-right: 5px">
-												<view v-if="item.item.trainee_examination_status == 0">
+												<view v-if="item.trainee_examination_status == 0">
 													<u-button text="答题" size="mini"
 													color="linear-gradient(to right, rgb(0, 220, 62), rgb(0, 138, 151))"
 													@click="fillIn(item)"></u-button>
 												</view>
 												<view v-if="item.trainee_examination_status == 1">
-													<text  style="font-weight: bold;font-size: 12px;color:#30db70;">已交卷</text>
+													<u-button text="已交卷" size="mini"
+													color="linear-gradient(to right, rgb(0, 220, 62), rgb(0, 138, 151))"
+													@click="fillIn(item)"></u-button>
 												</view>
 											</view>
 										</view>

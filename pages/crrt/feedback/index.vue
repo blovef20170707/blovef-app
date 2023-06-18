@@ -60,7 +60,7 @@
 <script>
 	import frame from '@/common/frame.js';
 	import {
-		apiCrrtTrainCourse
+		apiCrrtTrainFeedBackCourse 
 	} from '@/common/http.api.js';
 	export default {
 		data() {

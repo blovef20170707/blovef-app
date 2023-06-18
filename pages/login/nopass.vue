@@ -5,7 +5,7 @@
 		</view>
 		<view class="logo">
 				<view class="png">
-					<u--image src="/static/crrt/logo.png" width="200px" height="200px" mode="aspectFit">
+					<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/logo.png" width="200px" height="200px" mode="aspectFit">
 					</u--image>
 				</view>
 		</view>

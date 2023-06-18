@@ -48,8 +48,9 @@
 				<view style="height: 10px;">
 				</view>
 			</view>
+			<u-toast ref="uToast" />
 		</view>
-		<u-toast ref="uToast" />
+		
 	</view>
 </template>
 

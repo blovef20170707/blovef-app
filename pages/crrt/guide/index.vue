@@ -80,11 +80,9 @@
 				</u-list>
 			</view>
 			<!-- <u-modal :show="show" :title="title" :content='content'></u-modal> -->
+			<u-toast ref="uToast"></u-toast>
 		</view>
-		<u-toast ref="uToast"></u-toast>
-		
 	</view>
-
 </template>
 
 <script>
