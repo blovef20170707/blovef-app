@@ -55,18 +55,18 @@
 			</view>
 			<view v-if="current == 2">
 				<view>
-					<view><u--text prefixIcon="map-fill" iconStyle="color: #03840e" text="视频1"></u--text></view>
+					<view><u--text prefixIcon="map-fill" iconStyle="color: #03840e" text="护士公寓"></u--text></view>
 					<view style="height: 5px;"></view>
-					<view><video id="myVideo"
-							src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4"
+					<view><video id="myVideo1"
+							src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/v1.mp4"
 							@error="videoErrorCallback" controls></video>
 					</view>
 				</view>
 				<view>
-					<view><u--text prefixIcon="map-fill" iconStyle="color: #03840e" text="视频2"></u--text></view>
+					<view><u--text prefixIcon="map-fill" iconStyle="color: #03840e" text="学员管理中心"></u--text></view>
 					<view style="height: 5px;"></view>
-					<view><video id="myVideo"
-							src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4"
+					<view><video id="myVideo2"
+							src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/v2.mp4"
 							@error="videoErrorCallback" controls></video></view>
 				</view>
 			</view>

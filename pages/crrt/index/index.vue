@@ -12,12 +12,13 @@
 				<view style="height: 5px;"></view>
 				<view style="display: flex;height: 25px;">
 					<view style="width: 20%;">
-						<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/message1.png" width="25px" height="25px">
+						<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/message1.png"
+							width="25px" height="25px">
 						</u--image>
 					</view>
-					<view
-						@click="timeable()" style="width: 75%;height:25px;text-align: left;display: flex;align-items: center;flex-wrap: wrap;">
-						<text  style="font-size: 12px;">2023年理论培训授课安排一览表</text>
+					<view @click="timeable()"
+						style="width: 75%;height:25px;text-align: left;display: flex;align-items: center;flex-wrap: wrap;">
+						<text style="font-size: 12px;">2023年理论培训授课安排一览表</text>
 					</view>
 					<view style="width: 5%;height:25px;display: flex;align-items: center;flex-wrap: wrap;">
 						<u-icon name="arrow-right" size="12"></u-icon>
@@ -108,7 +109,8 @@
 <script>
 	import frame from '@/common/frame.js';
 	import {
-		apiCrrtTrainIndex,apiCrrtTrainTrainee
+		apiCrrtTrainIndex,
+		apiCrrtTrainTrainee
 	} from '@/common/http.api.js';
 	export default {
 		data() {
@@ -121,7 +123,7 @@
 			}
 		},
 		onLoad() {
-			this.getIndex();
+
 		},
 		onUnload() {
 
@@ -129,6 +131,7 @@
 		onShow() {
 			this.token = uni.getStorageSync('token');
 			console.log("onShow:" + this.token);
+			this.getIndex();
 		},
 		methods: {
 			appAction(item) {
@@ -136,31 +139,31 @@
 				if (!this.token) {
 					uni.$u.route('/pages/login/nopass');
 				} else {
-					if (item.tag == 0) {
-						this.$refs.uToast.show({
-							message: '该功能开发中',
-							type: 'warning'
-						});
+					if (item.title == '报名入口') {
+						uni.$u.route(item.url);
 					} else {
-						if(item.title == '报名入口'){
-							uni.$u.route(item.url);
-						}else{
-							apiCrrtTrainTrainee({}).then(data => {
-								console.log("学员", data)
-								if (data && data.trainee_status != 2) {
-									 this.$refs.uToast.show({
-									 	message: '请先报名,并等待审核通过',
-									 	type: 'warning'
-									 });
-								}else{
+						apiCrrtTrainTrainee({}).then(data => {
+							console.log("学员", data)
+							if (data && data.trainee_status != 2) {
+								this.$refs.uToast.show({
+									message: '请先报名,并等待审核通过',
+									type: 'warning'
+								});
+							} else {
+								if (item.tag == 0) {
+									this.$refs.uToast.show({
+										message: '该功能开发中',
+										type: 'warning'
+									});
+								} else {
 									uni.$u.route(item.url);
 								}
-							}).catch(exception => {
-								console.log("exception", exception)
-							}).finally(res => {
-							
-							})
-						}
+							}
+						}).catch(exception => {
+							console.log("exception", exception)
+						}).finally(res => {
+
+						})
 					}
 				}
 			},

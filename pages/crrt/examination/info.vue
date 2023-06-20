@@ -94,6 +94,7 @@
 				}).then(data => {
 					console.log("交卷", data);
 					this.disabled = true;
+					this.data.grade = data;
 					this.$refs.uToast.show({
 						message: '交卷成功',
 						type: 'success'

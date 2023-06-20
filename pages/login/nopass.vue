@@ -4,10 +4,11 @@
 		<view class="top">
 		</view>
 		<view class="logo">
-				<view class="png">
-					<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/logo.png" width="200px" height="200px" mode="aspectFit">
-					</u--image>
-				</view>
+			<view class="png">
+				<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/logo.png"
+					width="200px" height="200px" mode="aspectFit">
+				</u--image>
+			</view>
 		</view>
 		<view class="top">
 		</view>
@@ -15,16 +16,17 @@
 			<view class="form">
 				<view class="submit">
 					<view>
-					<u-button type="success" size="default" shape="square" :plain="false" :ripple="true"
-						@click="submit">登录</u-button>
+						<u-button type="success" size="default" shape="square" :plain="false" :ripple="true"
+							@click="submit">登录</u-button>
 					</view>
 					<view style="height: 5px;">
 					</view>
 					<view style="margin: 0 auto;text-align: center;">
-					<text style="font-size: 13px; color: #7d7e7f;">登录后解锁更多权益</text>
+						<text style="font-size: 13px; color: #7d7e7f;">登录后解锁更多权益</text>
 					</view>
 				</view>
 			</view>
+			<u-toast ref="uToast" />
 		</view>
 	</view>
 
@@ -119,17 +121,20 @@
 		background-color: white;
 	}
 
-    .top {
+	.top {
 		height: 50px;
 	}
-	.logo{
+
+	.logo {
 		width: 100%;
-		.png{
+
+		.png {
 			width: 200px;
 			height: 200px;
 			margin: 0 auto;
 		}
 	}
+
 	.mid {
 		width: 100%;
 		// height: 70%;

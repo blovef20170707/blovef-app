@@ -69,7 +69,6 @@
 			</view>
 			<u-toast ref="uToast" />
 		</view>
-		
 	</view>
 </template>
 
