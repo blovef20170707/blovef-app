@@ -6,6 +6,12 @@
 			<view>
 				<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
 				<u--form labelPosition="left" :model="model" :rules="rules" ref="form1" labelWidth="auto">
+					<u-form-item required="true" label="身份" prop="userInfo.identity" borderBottom
+						@click="showSheet('identity');hideKeyboard()" ref="item1">
+						<u--input v-model="model.userInfo.identityLabel" disabled disabledColor="#ffffff"
+							inputAlign="right" placeholder="请选择身份" border="none"></u--input>
+						<u-icon slot="right" name="arrow-right"></u-icon>
+					</u-form-item>
 					<u-form-item required="true" label="姓名" prop="userInfo.name" borderBottom ref="item1">
 						<u--input :disabled="disabled" v-model="model.userInfo.name" border="none" inputAlign="right"
 							placeholder="请输入姓名"></u--input>
@@ -49,6 +55,9 @@
 							v-model="model.userInfo.remark" count></u--textarea>
 					</u-form-item>
 				</u--form>
+				<u-action-sheet :show="showIdentity" :actions="identityActions" title="请选择身份"
+					@close="showIdentity = false" @select="identitySelect">
+				</u-action-sheet>
 				<u-action-sheet :show="showSex" :actions="sexActions" title="请选择性别" @close="showSex = false"
 					@select="sexSelect">
 				</u-action-sheet>
@@ -58,11 +67,13 @@
 				<u-action-sheet :show="showDegree" :actions="degreeActions" title="请选择学历" @close="showDegree = false"
 					@select="degreeSelect">
 				</u-action-sheet>
-				<u-button v-if="model.userInfo.trainee_status == 0" type="primary" text="提交报名"
+				<u-button v-if="model.userInfo.trainee_status == 0" type="primary" text="提交申请"
 					customStyle="margin-top: 30px" @click="submit"></u-button>
 				<u-button disabled="true" v-if="model.userInfo.trainee_status == 1" type="success" text="待审核"
 					customStyle="margin-top: 30px"></u-button>
-				<u-button disabled="true" v-if="model.userInfo.trainee_status == 2" type="primary" text="通过报名"
+				<u-button disabled="true" v-if="model.userInfo.trainee_status == 2" type="primary" text="审核通过"
+					customStyle="margin-top: 30px"></u-button>
+				<u-button disabled="true" v-if="model.userInfo.trainee_status == 3" type="primary" text="审核拒绝"
 					customStyle="margin-top: 30px"></u-button>
 			</view>
 			<view style="height: 10px;">
@@ -84,6 +95,7 @@
 				showSex: false,
 				showStay: false,
 				showDegree: false,
+				showIdentity: false,
 				disabled: false,
 				model: {
 					userInfo: {
@@ -99,9 +111,22 @@
 						sexLabel: '',
 						degreeLabel: '',
 						stayLabel: '',
+						identity: '',
+						identityLabel: '',
 						trainee_status: 0
 					},
 				},
+				identityActions: [{
+						label: '专科班学员',
+						name: '专科班学员',
+						value: '0'
+					},
+					{
+						label: '进修生',
+						name: '进修生',
+						value: '1'
+					}
+				],
 				sexActions: [{
 						label: '男',
 						name: '男',
@@ -151,6 +176,12 @@
 					}
 				],
 				rules: {
+					'userInfo.identity': {
+						type: 'number',
+						required: true,
+						message: '请选择身份',
+						trigger: ['blur', 'change']
+					},
 					'userInfo.name': [{
 						type: 'string',
 						required: true,
@@ -211,6 +242,8 @@
 						this.showDegree = true
 					} else if (e == "stay") {
 						this.showStay = true
+					} else if (e == "identity") {
+						this.showIdentity = true
 					}
 				}
 			},
@@ -225,6 +258,10 @@
 			staySelect(e) {
 				this.model.userInfo.stay = e.value
 				this.model.userInfo.stayLabel = e.name
+			},
+			identitySelect(e) {
+				this.model.userInfo.identity = e.value
+				this.model.userInfo.identityLabel = e.name
 			},
 			queryTrainee() {
 				apiCrrtTrainTrainee({}).then(data => {

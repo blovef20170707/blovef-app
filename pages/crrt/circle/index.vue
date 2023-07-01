@@ -4,8 +4,8 @@
 			<view style="height: 5px;">
 			</view>
 			<view class="u-demo-block">
-				<view class="u-demo-block__content">
-					<view v-for="(item,index) in list" :key="index">
+				<view v-for="(item,index) in list" :key="index" class="u-demo-block__content">
+					<view>
 						<view class="album">
 							<view class="album__avatar">
 								<u-avatar :src="item.asrc" size="50"></u-avatar>
@@ -23,7 +23,13 @@
 								<view :style="{marginBottom: '8px'}">
 									<u--text :text="item.content" color="#7d7e7f"></u--text>
 								</view>
-								<u-album :urls="item.urls" multipleSize="68"></u-album>
+								<view v-if="item.type == 0" >
+									<u-album :urls="item.urls" multipleSize="68"></u-album>
+								</view>
+								<view v-if="item.type == 1">
+									<video style="width: 95%;height: 180px;" :id="item.id" :src="item.vurl"
+											@error="videoErrorCallback" controls></video>
+								</view>
 								<view style="height: 8px;">
 								</view>
 								<view style="display: flex;">
@@ -96,7 +102,14 @@
 					message: '该功能开发中',
 					type: 'warning'
 				});
-			}
+			},
+			videoErrorCallback: function(e) {
+				console.log(e)
+				uni.showModal({
+					content: e.target.errMsg,
+					showCancel: false
+				})
+			},
 		}
 	}
 </script>
@@ -130,7 +143,7 @@
 		}
 
 		&__content {
-			margin-left: 10px;
+			margin-left: 2px;
 			flex: 1;
 		}
 	}

@@ -150,13 +150,24 @@
 									type: 'warning'
 								});
 							} else {
+								console.log(item)
 								if (item.tag == 0) {
 									this.$refs.uToast.show({
 										message: '该功能开发中',
 										type: 'warning'
 									});
 								} else {
-									uni.$u.route(item.url);
+									if (item.title == '学习园地') {
+										console.log("222")
+										uni.$u.route({
+											"type": "switchTab",
+											"url": item.url
+										});
+									} else {
+										console.log("333")
+										uni.$u.route(item.url);
+									}
+
 								}
 							}
 						}).catch(exception => {

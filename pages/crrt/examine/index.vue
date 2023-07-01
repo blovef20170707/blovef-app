@@ -18,7 +18,7 @@
 								</view>
 								<view style="width: 10px;">
 								</view>
-								<view style="width:100%;height: 45px;">
+								<view style="width:100%;height: 60px;">
 									<view>
 										<view>
 											<u--text lines="2" size="13" bold=true color="#272727"
@@ -29,9 +29,10 @@
 									<view style="display: flex;">
 									</view>
 									<view style="display: flex;font-weight:bolder;color: #7d7e7f;font-size: 12px;">
-										<view style="width: 75%;">
+										<view style="width: 75%;font-size: 12px;">
 											<view><text>{{item.phone}}</text></view>
 											<view><text>{{item.idcard}}</text></view>
+											<view><text>{{item.identityLabel}}</text></view>
 										</view>
 										<view style="width: 25%;">
 											<view style="float: right;display: flex;padding-right: 5px">

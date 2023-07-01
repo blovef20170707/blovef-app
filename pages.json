@@ -152,6 +152,18 @@
 			}
 		},
 		{
+			"path": "pages/crrt/team/index",
+			"style": {
+				"navigationBarTitleText": "师资队伍"
+			}
+		},
+		{
+			"path": "pages/crrt/dev/index",
+			"style": {
+				"navigationBarTitleText": "开发中"
+			}
+		},
+		{
 			"path": "pages/crrt/examine/index",
 			"style": {
 				"navigationBarTitleText": "审批报名"
@@ -167,6 +179,18 @@
 			"path": "pages/crrt/timeable/index",
 			"style": {
 				"navigationBarTitleText": "课表"
+			}
+		},
+		{
+			"path": "pages/crrt/employees/index",
+			"style": {
+				"navigationBarTitleText": "员工认证"
+			}
+		},
+		{
+			"path": "pages/crrt/vip/index",
+			"style": {
+				"navigationBarTitleText": "我的会员"
 			}
 		}
 	],
@@ -206,5 +230,6 @@
 		"navigationBarTitleText": "blovef",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#fafafa"
-	}
+	},
+	"entryPagePath": "pages/crrt/index/index"
 }

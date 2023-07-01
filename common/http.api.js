@@ -17,6 +17,8 @@ let queryLoanArrayUrl = '/carSuit/queryLoan';
 
 let crrtTrainIndexUrl = '/crrt/train/index';
 let crrtTrainCircleUrl = '/crrt/train/circle/index';
+let crrtTrainStudyIndexUrl = '/crrt/train/study/index';
+
 let crrtTrainDocUrl = '/crrt/train/doc/index';
 let crrtTrainApplicationUrl = '/crrt/train/application';
 let crrtTrainTraineeUrl = '/crrt/train/trainee';
@@ -34,6 +36,8 @@ let crrtTrainExaminationTopicUrl = '/crrt/train/trainee/examination/topic';
 let crrtTrainExaminationEndUrl = '/crrt/train/trainee/examination/end';
 let crrtTrainExamineUrl = '/crrt/train/examine';
 let crrtFeedBackOpenUrl = '/crrt/train/feedback/open';
+
+
 
 
 
@@ -66,6 +70,7 @@ export const apiCrrtFeedBackOpen = (params, config = {}) => http.post(crrtFeedBa
 export const apiGetMenu = (data) => http.get(getMenuUrl, data)
 export const apiCrrtTrainIndex = (data) => http.get(crrtTrainIndexUrl, data)
 export const apiCrrtTrainCircleIndex = (data) => http.get(crrtTrainCircleUrl, data)
+export const apiCrrtTrainStudyIndex = (data) => http.get(crrtTrainStudyIndexUrl, data)
 export const apiCrrtTrainDocIndex = (data) => http.get(crrtTrainDocUrl, data)
 export const apiCrrtTrainTrainee = (data) => http.get(crrtTrainTraineeUrl, data)
 export const apiCrrtTrainTrainees = (data) => http.get(crrtTrainTraineesUrl, data)

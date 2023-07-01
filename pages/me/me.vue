@@ -6,17 +6,29 @@
 			<view style="width: 100%;background-color: white;border-radius:5px;height: 100%;">
 				<view style="height: 10px;">
 				</view>
-				<view style="display: flex;">
+				<view style="display: flex;" @click="me()">
 					<view style="width: 10px;"></view>
 					<view style="height: 50px;"><u-avatar :src="model.userInfo.avatarUrl" size="50"
 							shape="square"></u-avatar></view>
 					<view style="width: 15px;"></view>
 					<view style="height: 50px;">
 						<view style="height: 20px;display: flex;">
-							<view><text style="font-size: 16px;color: #272727;">{{model.userInfo.name}}</text></view>
-							<view style="width: 10px;"></view>
-							<view><u-tag :text="model.userInfo.standing" plain size="mini" bgColor="#4eb061"
-									color="#ffffff" borderColor="#ffffff" plain plainFill></u-tag></view>
+							<view style="display: flex;width: 60%;">
+								<view><text style="font-size: 16px;color: #272727;">{{model.userInfo.name}}</text>
+								</view>
+								<view style="width: 10px;"></view>
+								<view>
+									<u-tag :text="model.userInfo.standing" plain size="mini" bgColor="#4eb061"
+										color="#ffffff" borderColor="#ffffff" plain plainFill></u-tag>
+								</view>
+							</view>
+							<view style="width:40%">
+								<view style="float: right;" @click="msg()">
+									<u--image src="/static/crrt/me_msg.png" width="25px" height="25px"
+										mode="scaleToFill">
+									</u--image>
+								</view>
+							</view>
 						</view>
 						<view style="height: 15px;">
 						</view>
@@ -30,12 +42,14 @@
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;">
 				<u-cell-group>
-					<u-cell v-if="" title="会员等级" value="普通会员" icon="/static/crrt/me_hy.png"></u-cell>
+					<u-cell title="我的身份" :value="model.userInfo.identityLabel" icon="/static/crrt/me_hy.png"></u-cell>
 					<u-cell title="我的课程" isLink url="" @click="cellClick()" icon="/static/crrt/me_kc.png"></u-cell>
 					<u-cell title="我的收藏" isLink url="" @click="cellClick()" icon="/static/crrt/me_sc.png"></u-cell>
 					<u-cell title="我的考试" isLink url="" @click="cellClick()" icon="/static/crrt/me_ks2.png"></u-cell>
-					<u-cell title="我的荣誉" isLink url="" @click="cellClick()" icon="/static/crrt/me_yy.png"></u-cell>
+					<u-cell title="我的成就" isLink url="" @click="cellClick()" icon="/static/crrt/me_yy.png"></u-cell>
 					<u-cell title="我的关注" isLink url="" @click="cellClick()" icon="/static/crrt/me_gz.png"></u-cell>
+					<u-cell title="员工认证" isLink url="/pages/crrt/employees/index"
+						icon="/static/crrt/me_em.png"></u-cell>
 					<u-cell v-if="model.userInfo.role_type == 3" title="审批报名" isLink url="/pages/crrt/examine/index"
 						icon="/static/crrt/bmsp.png"></u-cell>
 					<u-cell title="开通反馈" v-if="model.userInfo.role_type == 3" isLink url="/pages/crrt/feedback/open"
@@ -65,6 +79,7 @@
 						id: '',
 						name: '',
 						standing: '',
+						identityLabel: '',
 						avatarUrl: '',
 						information_status: 0,
 						role_type: -1,
@@ -81,15 +96,19 @@
 		onShow() {
 			this.token = uni.getStorageSync('token');
 			console.log("onShow:" + this.token);
+			if (!this.token) {
+				uni.$u.route({
+					type: 'reLaunch',
+					url: '/pages/login/nopass'
+				});
+			} else {
+				this.queryTrainee();
+			}
 		},
 		methods: {
 			onTabItemTap() {
 				console.log('onTabItemTap');
-				if (!this.token) {
-					uni.$u.route('/pages/login/nopass');
-				} else {
-					this.queryTrainee();
-				}
+				
 			},
 			queryTrainee() {
 				apiCrrtTrainTrainee({}).then(data => {
@@ -103,11 +122,19 @@
 
 				})
 			},
-			cellClick(){
+			cellClick() {
 				this.$refs.uToast.show({
 					message: '该功能开发中',
 					type: 'warning'
 				});
+			},
+			msg() {
+				uni.$u.route("/pages/message/indexcard");
+			},
+			me() {
+				if(this.model.userInfo.name == "胡彬"){
+					uni.$u.route("/pages/crrt/vip/index");
+				}
 			}
 		}
 	}

@@ -12,7 +12,7 @@
 							placeholder="请输入姓名"></u--input>
 					</u-form-item>
 					<u-form-item label="身份证" prop="userInfo.idcard" borderBottom ref="item1">
-						<u--input :disabled="disabled" v-model="model.userInfo.idcard" type="number" border="none" inputAlign="right"
+						<u--input :disabled="disabled" v-model="model.userInfo.idcard" type="idcard" border="none" inputAlign="right"
 							placeholder="请输入身份证"></u--input>
 					</u-form-item>
 					<u-form-item label="紧急联系人电话" prop="userInfo.contact_phone" borderBottom ref="item1">
