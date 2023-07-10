@@ -9,7 +9,7 @@
 			<view style="height: 4px;">
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;">
-				<view style="height: 5px;"></view>
+				<view style="height: 4px;"></view>
 				<view>
 					<view>
 						<view>
@@ -38,13 +38,13 @@
 						</view>
 					</view>
 				</view>
-				<view style="height: 5px;">
+				<view style="height: 4px;">
 				</view>
 				<view>
 					<view style="border-bottom:1px solid #d0d0d0" v-for="(item,index) in courseList" :key="index">
-						<view style="height: 5px;">
+						<view style="height: 4px;">
 						</view>
-						<view style="display: flex;" @click="course()">
+						<view style="display: flex;" @click="course(item)">
 							<view style="width: 3px;">
 							</view>
 							<view style="height:80px;">
@@ -83,7 +83,7 @@
 							<view style="width: 2px;">
 							</view>
 						</view>
-						<view style="height: 5px;">
+						<view style="height: 4px;">
 						</view>
 					</view>
 				</view>
@@ -102,13 +102,13 @@
 	export default {
 		data() {
 			return {
-
 				inputStyle: {
 					fontSize: '12px', 
 				},
 				actionStyle: {
 					fontSize: '12px', 
 				},
+				keyword: '',
 				token: '',
 				banList: [],
 				courseList: [],
@@ -150,11 +150,17 @@
 
 				})
 			},
-			course() {
-				this.$refs.uToast.show({
-					message: '该功能开发中',
-					type: 'warning'
-				});
+			course(item) {
+				if (item.listing_status == 0) {
+					this.$refs.uToast.show({
+						message: '该课程未开放',
+						type: 'warning'
+					});
+				} else {
+					uni.$u.route("/pages/crrt/study/course", {
+						params: JSON.stringify(item)
+					});
+				}
 			}
 		}
 	}

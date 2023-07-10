@@ -31,9 +31,7 @@ const isArray = Array.isArray || function(obj) {
 const isNull = function(obj) {
 	if (obj == null || obj == undefined || obj == '') {
 		return true;
-	} else if (obj.replace(/(^s*)|(s*$)/g, "").length == 0) {
-		return true;
-	} else if (!obj) {
+	}  else if (!obj) {
 		return true;
 	} else {
 		return false;

@@ -192,6 +192,24 @@
 			"style": {
 				"navigationBarTitleText": "我的会员"
 			}
+		},
+		{
+			"path": "pages/crrt/share/index",
+			"style": {
+				"navigationBarTitleText": "分享乐园"
+			}
+		},
+		{
+			"path": "pages/crrt/scientific/index",
+			"style": {
+				"navigationBarTitleText": "科研成果"
+			}
+		},
+		{
+			"path": "pages/crrt/study/course",
+			"style": {
+				"navigationBarTitleText": "课程"
+			}
 		}
 	],
 	"tabBar": {

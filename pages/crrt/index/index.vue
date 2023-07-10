@@ -57,7 +57,7 @@
 					<view style="border-bottom:1px solid #d0d0d0" v-for="(item,index) in courseList" :key="index">
 						<view style="height: 5px;">
 						</view>
-						<view style="display: flex;" @click="course()">
+						<view style="display: flex;" @click="course(item)">
 							<view style="width: 2px;">
 							</view>
 							<view style="height:80px">
@@ -81,7 +81,7 @@
 										<view style="width:2px;"></view>
 									</view>
 								</view>
-								<view style="height: 10px;"></view>
+								<view style="height: 20px;"></view>
 								<view style="display: flex;font-weight:bolder;color: #8f8f8f;font-size: 12px;">
 									<view style="width: 75%;">
 										<text>{{item.name}}</text>
@@ -194,11 +194,17 @@
 				console.log("test")
 				uni.$u.route('/pages/crrt/timeable/index');
 			},
-			course() {
-				this.$refs.uToast.show({
-					message: '该功能开发中',
-					type: 'warning'
-				});
+			course(item) {
+				if (item.listing_status == 0) {
+					this.$refs.uToast.show({
+						message: '该课程未开放',
+						type: 'warning'
+					});
+				} else {
+					uni.$u.route("/pages/crrt/study/course", {
+						params: JSON.stringify(item)
+					});
+				}
 			}
 		}
 	}

@@ -4,14 +4,14 @@
 			<view style="height: 5px;">
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;height: 100%;">
-				<view style="height: 10px;">
+				<view style="height: 5px;">
 				</view>
 				<view style="display: flex;" @click="me()">
 					<view style="width: 10px;"></view>
 					<view style="height: 50px;"><u-avatar :src="model.userInfo.avatarUrl" size="50"
 							shape="square"></u-avatar></view>
 					<view style="width: 15px;"></view>
-					<view style="height: 50px;">
+					<view style="height: 50px;width: 100%;">
 						<view style="height: 20px;display: flex;">
 							<view style="display: flex;width: 60%;">
 								<view><text style="font-size: 16px;color: #272727;">{{model.userInfo.name}}</text>
@@ -23,7 +23,7 @@
 								</view>
 							</view>
 							<view style="width:40%">
-								<view style="float: right;" @click="msg()">
+								<view style="float: right;padding-right: 5px;" @click="msg()">
 									<u--image src="/static/crrt/me_msg.png" width="25px" height="25px"
 										mode="scaleToFill">
 									</u--image>
@@ -38,7 +38,7 @@
 				<view style="height: 10px;">
 				</view>
 			</view>
-			<view style="height: 10px;">
+			<view style="height: 5px;">
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;">
 				<u-cell-group>

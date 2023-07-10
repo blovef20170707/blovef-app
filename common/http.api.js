@@ -10,7 +10,6 @@ let nodeActionUrl = '/api/v1/nodeAction';
 let getMenuUrl = '/sys/getMenu';
 let getMessageUrl = '/sys/getMessage';
 
-
 let evaluationUrl = '/carSuit/evaluation';
 let evaluationReportUrl = '/carSuit/evaluationReport';
 let queryLoanArrayUrl = '/carSuit/queryLoan';
@@ -18,6 +17,10 @@ let queryLoanArrayUrl = '/carSuit/queryLoan';
 let crrtTrainIndexUrl = '/crrt/train/index';
 let crrtTrainCircleUrl = '/crrt/train/circle/index';
 let crrtTrainStudyIndexUrl = '/crrt/train/study/index';
+let crrtTrainTeamIndexUrl = '/crrt/train/team/index';
+let crrtTrainShareIndexUrl = '/crrt/train/share/index';
+let crrtTrainScientificIndexUrl = '/crrt/train/scientific/index';
+let crrtTrainCourseIndexUrl = '/crrt/train/course/index';
 
 let crrtTrainDocUrl = '/crrt/train/doc/index';
 let crrtTrainApplicationUrl = '/crrt/train/application';
@@ -36,9 +39,6 @@ let crrtTrainExaminationTopicUrl = '/crrt/train/trainee/examination/topic';
 let crrtTrainExaminationEndUrl = '/crrt/train/trainee/examination/end';
 let crrtTrainExamineUrl = '/crrt/train/examine';
 let crrtFeedBackOpenUrl = '/crrt/train/feedback/open';
-
-
-
 
 
 
@@ -72,6 +72,11 @@ export const apiCrrtTrainIndex = (data) => http.get(crrtTrainIndexUrl, data)
 export const apiCrrtTrainCircleIndex = (data) => http.get(crrtTrainCircleUrl, data)
 export const apiCrrtTrainStudyIndex = (data) => http.get(crrtTrainStudyIndexUrl, data)
 export const apiCrrtTrainDocIndex = (data) => http.get(crrtTrainDocUrl, data)
+export const apiCrrtTrainTeamIndex = (data) => http.get(crrtTrainTeamIndexUrl, data)
+export const apiCrrtTrainShareIndex = (data) => http.get(crrtTrainShareIndexUrl, data)
+export const apiCrrtTrainScientificIndex = (data) => http.get(crrtTrainScientificIndexUrl, data)
+export const apiCrrtTrainCourseIndex = (data) => http.get(crrtTrainCourseIndexUrl, data)
+
 export const apiCrrtTrainTrainee = (data) => http.get(crrtTrainTraineeUrl, data)
 export const apiCrrtTrainTrainees = (data) => http.get(crrtTrainTraineesUrl, data)
 export const apiCrrtTrainCourse = (data) => http.get(crrtTrainCourseUrl, data)
