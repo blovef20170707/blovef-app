@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 		<view class="container">
-			<view style="height: 5px;">
+			<view style="height: 10px;">
 			</view>
 			<view class="u-demo-block">
 				<view v-for="(item,index) in list" :key="index" class="u-demo-block__content">
@@ -11,24 +11,31 @@
 								<u-avatar :src="item.asrc" size="50"></u-avatar>
 							</view>
 							<view class="album__content">
+
 								<view style="display: flex;">
 									<view style="width: 75%;">
 										<u--text :text="item.name" color="#000000" bold size="17"></u--text>
 									</view>
-									<view style="width: 25%;display: flex;float: right;color: #db87e9;">
-										<u-button text="已关注" size="mini" shape="circle"
-											color="linear-gradient(to right, rgb(198, 201, 216), rgb(208, 142, 255))"></u-button>
+									<view style="width: 25%;color: #db87e9;">
+										<view style="float: right;display: flex;padding-right: 5px;">
+											<!-- <u--image src="/static/crrt/authority1.png" width="40px" height="20px"
+												mode="scaleToFill"></u--image> -->
+											<u-button text="官方" size="mini" shape="square"
+												color="linear-gradient(to right, rgb(198, 201, 216), rgb(208, 142, 255))"></u-button>
+										</view>
 									</view>
+								</view>
+								<view style="height: 5px;">
 								</view>
 								<view :style="{marginBottom: '8px'}">
 									<u--text :text="item.content" color="#7d7e7f"></u--text>
 								</view>
-								<view v-if="item.type == 0" >
+								<view v-if="item.type == 0">
 									<u-album :urls="item.urls" multipleSize="68"></u-album>
 								</view>
 								<view v-if="item.type == 1">
 									<video style="width: 95%;height: 180px;" :id="item.id" :src="item.vurl"
-											@error="videoErrorCallback" controls></video>
+										@error="videoErrorCallback" controls></video>
 								</view>
 								<view style="height: 8px;">
 								</view>
@@ -42,16 +49,19 @@
 										</view>
 									</view>
 								</view>
-								<view style="height: 20px;">
-								</view>
+
 							</view>
 						</view>
+					</view>
+					<view style="height: 10px;border-bottom:1px solid #e7e7e7">
+					</view>
+					<view style="height: 10px;">
 					</view>
 				</view>
 			</view>
 			<u-toast ref="uToast"></u-toast>
 		</view>
-		
+
 	</view>
 </template>
 
@@ -68,7 +78,7 @@
 			}
 		},
 		onLoad() {
-			
+
 		},
 		onUnload() {
 
@@ -77,7 +87,7 @@
 			this.token = uni.getStorageSync('token');
 			console.log("onShow:" + this.token);
 		},
-		
+
 		methods: {
 			onTabItemTap() {
 				console.log('onTabItemTap');
@@ -97,7 +107,7 @@
 
 				})
 			},
-			pl(){
+			pl() {
 				this.$refs.uToast.show({
 					message: '该功能开发中',
 					type: 'warning'
@@ -147,4 +157,6 @@
 			flex: 1;
 		}
 	}
+
+	.u-demo-block {}
 </style>

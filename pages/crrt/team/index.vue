@@ -2,17 +2,17 @@
 	<view class="wrap">
 		<view class="container">
 			<view>
-				<view style="height: 4px;">
+				<view style="height: 5px;">
 				</view>
 				<view style="width: 100%;background-color: white;">
 					<u-swiper imgMode="heightFix" :list="banList"></u-swiper>
 				</view>
-				<view style="height: 4px;"></view>
+				<view style="height: 5px;"></view>
 				<view v-for="(item,index) in jslist">
 					<view style="background-color: white;border-radius:5px;">
-						<view style="height: 2px;"></view>
+						<view style="height: 10px;"></view>
 						<view style="display: flex;">
-							<view><u-avatar :src="item.img" size="80"></u-avatar></view>
+							<view style="padding-left: 5px;"><u-avatar :src="item.img" size="70"></u-avatar></view>
 							<view style="padding-left: 10px;">
 								<view><text style="color: black;font-size: 13px;">{{item.name}}</text></view>
 								<view style="display: flex;">
@@ -26,7 +26,7 @@
 								</view>
 							</view>
 						</view>
-						<view style="height: 2px;"></view>
+						<view style="height: 10px;"></view>
 					</view>
 					<view style="height: 5px;"></view>
 				</view>

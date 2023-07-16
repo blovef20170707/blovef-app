@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 		<view class="container">
-			<view style="height: 2px;">
+			<view style="height: 5px;">
 			</view>
 			<view>
 				<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->

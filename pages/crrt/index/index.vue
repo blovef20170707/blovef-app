@@ -1,16 +1,16 @@
 <template>
 	<view class="wrap">
 		<view class="container">
-			<view style="height: 2px;">
+			<view style="height: 5px;">
 			</view>
 			<view style="width: 100%;background-color: white;">
 				<u-swiper :list="banList" imgMode="heightFix"></u-swiper>
 			</view>
-			<view style="height: 4px;">
+			<view style="height: 5px;">
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;">
 				<view style="height: 5px;"></view>
-				<view style="display: flex;height: 25px;">
+				<view style="display: flex;height: 25px;padding-left: 5px;">
 					<view style="width: 20%;">
 						<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/message1.png"
 							width="25px" height="25px">
@@ -20,7 +20,8 @@
 						style="width: 75%;height:25px;text-align: left;display: flex;align-items: center;flex-wrap: wrap;">
 						<text style="font-size: 12px;">2023年理论培训授课安排一览表</text>
 					</view>
-					<view style="width: 5%;height:25px;display: flex;align-items: center;flex-wrap: wrap;">
+					<view
+						style="padding-right: 5px;width: 5%;height:25px;display: flex;align-items: center;flex-wrap: wrap;">
 						<u-icon name="arrow-right" size="12"></u-icon>
 					</view>
 				</view>
@@ -39,14 +40,16 @@
 					</view>
 				</view>
 			</view>
-			<view style="height: 4px;">
+			<view style="height: 5px;">
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;">
-				<view style="display: flex;">
+				<view style="height: 5px;">
+				</view>
+				<view style="display: flex;padding-left: 5px;">
 					<view style="width: 60%;"><text
 							style="font-size: 12px;font-weight:bolder;color: #272727;">推荐课程</text></view>
 					<view style="width: 40%;">
-						<view style="float: right;display: flex;">
+						<view style="float: right;display: flex;padding-right: 5px;">
 							<text style="font-size: 12px;">查看全部</text><u-icon name="arrow-right" size="12"></u-icon>
 						</view>
 					</view>
@@ -54,15 +57,20 @@
 				<view style="height: 5px;">
 				</view>
 				<view>
-					<view style="border-bottom:1px solid #d0d0d0" v-for="(item,index) in courseList" :key="index">
-						<view style="height: 5px;">
+					<view style="padding-left: 5px;border-bottom:1px solid #e7e7e7" v-for="(item,index) in courseList"
+						:key="index">
+						<view style="height: 10px;">
 						</view>
 						<view style="display: flex;" @click="course(item)">
 							<view style="width: 2px;">
 							</view>
-							<view style="height:80px">
-								<u--image :src="item.icon" width="110px" height="80px" mode="scaleToFill">
+							<view style="height:80px;position: relative;padding: 0">
+								<u--image radius="5" :src="item.icon" width="110px" height="80px" mode="scaleToFill">
 								</u--image>
+								<view v-if="item.live == true" class="live">
+									<view class="zb"></view>
+									<view style="margin-left:4px;"><text style="font-size: 10px;">直播中</text></view>
+								</view>
 							</view>
 							<view style="width: 10px;">
 							</view>
@@ -86,7 +94,7 @@
 									<view style="width: 75%;">
 										<text>{{item.name}}</text>
 									</view>
-									<view style="width: 25%;">
+									<view style="width: 25%;padding-right: 5px;">
 										<view style="float: right;display: flex;">
 											<text>{{item.time}}课时</text>
 										</view>
@@ -96,7 +104,7 @@
 							<view style="width: 2px;">
 							</view>
 						</view>
-						<view style="height: 5px;">
+						<view style="height: 10px;">
 						</view>
 					</view>
 				</view>
@@ -225,10 +233,6 @@
 
 	.container {
 		width: 97%;
-		// margin: 20px;
-		// width: 500px;
-		// height: 500px;
-		// perspective: 1000px;
 	}
 
 	.leftLable {
@@ -253,5 +257,27 @@
 		/* #ifndef APP-PLUS */
 		box-sizing: border-box;
 		/* #endif */
+	}
+
+	.zb {
+		width: 10px;
+		height: 10px;
+		background: url('/static/crrt/zb.gif') no-repeat 50%/contain;
+		vertical-align: bottom;
+	}
+
+	.live {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 0px;
+		// left: 6px;
+		padding: 1px 2px;
+		border-radius: 4px;
+		line-height: 12px;
+		font-weight: 300;
+		font-size: 10px;
+		color: #fff;
+		background-color: #f23f4e;
 	}
 </style>

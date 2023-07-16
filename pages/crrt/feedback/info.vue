@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 		<view class="container">
-			<view style="height: 2px;">
+			<view style="height: 5px;">
 				<view>
 					<u--form :model="model" :rules="rules" ref="form1" labelPosition="top" labelWidth="auto">
 						<u-form-item label="您对本次课程的满意度" prop="feedBack.eva" borderBottom

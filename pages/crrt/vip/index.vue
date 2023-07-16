@@ -2,6 +2,7 @@
 	<view class="wrap">
 		<view class="container">
 			<scroll-view scroll-top="0" scroll-y="true" class="scrollwrap">
+				<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/vip_new.png"  :width="screenWidth" :height="screenHeight" model="widthFix"></u--image>
 			</scroll-view>
 			<u-toast ref="uToast"></u-toast>
 		</view>
@@ -16,11 +17,23 @@
 	export default {
 		data() {
 			return {
-
+				screenWidth:'',
+				screenHeight:''
 			}
 		},
 		onLoad() {
-
+			let _this = this
+			uni.getSystemInfo({
+				success: function(res) {
+					// 设备屏幕宽度
+					_this.screenWidth = res.screenWidth;
+					// 设备屏幕高度
+					_this.screenHeight = res.screenHeight;
+					_this.screenHeight = res.screenWidth/0.395;
+					console.log('屏幕宽度：' + _this.screenWidth);
+					console.log('屏幕高度：' + _this.screenHeight);
+				}
+			});
 		},
 		onUnload() {
 
@@ -45,13 +58,12 @@
 		flex-wrap: wrap;
 		font-size: 12px;
 		color: #7d7e7f;
-		background: url('https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/vip.png');
-		background-size:cover;
+		// background: url('https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/vip.png');
+		// background-size:cover;
 		overflow: scroll;
 	}
 
-
-	// .container {
-	// 	width: 97%;
-	// }
+	.img {
+	
+	}
 </style>

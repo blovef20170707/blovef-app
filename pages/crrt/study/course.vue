@@ -1,10 +1,10 @@
 <template>
 	<view class="wrap">
 		<view class="container">
-			<view style="height: 4px;">
+			<view style="height: 5px;">
 			</view>
 			<view style="width: 100%;background-color: white;border-radius:5px;">
-				<view style="height: 2px;">
+				<view style="height: 5px;">
 				</view>
 				<view style="display: flex;">
 					<view style="width: 60%;padding-left:5px;"><text
@@ -47,13 +47,15 @@
 					</view>
 				</view>
 			</view>
-			<view style="height: 4px;background-color: #f1f1f1;">
+			<view style="height: 5px;background-color: #f1f1f1;">
 			</view>
 			<view style="width: 100%;height: 100%; background-color: white;border-radius:5px;">
-				<view style="height: 2px;">
+				<view style="height: 5px;">
 				</view>
 				<u-tabs :list="course.tabslist" :current="current" @change="change">
 				</u-tabs>
+				<view style="height: 5px;">
+				</view>
 				<view v-if="current == 0" style="padding-left:5px;">
 					<view style="display: flex;">
 						<view style="width: 60%;"><text
@@ -96,7 +98,7 @@
 											<view><text
 													style="color: #7d7e7f;font-size: 12px;">{{course.teacher.name}}</text>
 											</view>
-											<view style="height: 4px;"></view>
+											<view style="height: 5px;"></view>
 											<view><text style="color: #7d7e7f;font-size: 12px;">肾内科/主治医师</text></view>
 										</view>
 										<view
@@ -111,8 +113,6 @@
 									</view>
 								</view>
 							</view>
-						</view>
-						<view style="height: 2px;">
 						</view>
 					</view>
 				</view>
@@ -133,7 +133,7 @@
 					</view>
 				</view>
 			</view>
-			<view style="height: 4px;">
+			<view style="height: 5px;">
 			</view>
 			<u-toast ref="uToast"></u-toast>
 		</view>

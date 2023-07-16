@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 		<view class="container">
-			<view style="height: 2px;">
+			<view style="height: 5px;">
 			</view>
 			<view style="height: 20px;">
 				<view style="display: flex;">
