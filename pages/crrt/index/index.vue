@@ -69,7 +69,9 @@
 								</u--image>
 								<view v-if="item.live == true" class="live">
 									<view class="zb"></view>
-									<view style="margin-left:4px;"><text style="font-size: 10px;">直播中</text></view>
+									<view style="margin-left:4px;">
+										<text style="font-size: 10px;">{{item.liveText}}</text>
+									</view>
 								</view>
 							</view>
 							<view style="width: 10px;">
@@ -260,8 +262,8 @@
 	}
 
 	.zb {
-		width: 10px;
-		height: 10px;
+		width: 12px;
+		height: 12px;
 		background: url('/static/crrt/zb.gif') no-repeat 50%/contain;
 		vertical-align: bottom;
 	}

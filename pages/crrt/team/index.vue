@@ -9,7 +9,7 @@
 				</view>
 				<view style="height: 5px;"></view>
 				<view v-for="(item,index) in jslist">
-					<view style="background-color: white;border-radius:5px;">
+					<view style="background-color: white;border-radius:5px;" @click="showModal(item)">
 						<view style="height: 10px;"></view>
 						<view style="display: flex;">
 							<view style="padding-left: 5px;"><u-avatar :src="item.img" size="70"></u-avatar></view>
@@ -21,7 +21,7 @@
 											color="#ffffff" borderColor="#ffffff" plain plainFill></u-tag>
 									</view>
 								</view>
-								<view>
+								<view style="padding-right:5px">
 									<u--text size="12" :lines="3" color="#888888" :text="item.content"></u--text>
 								</view>
 							</view>
@@ -31,6 +31,7 @@
 					<view style="height: 5px;"></view>
 				</view>
 			</view>
+			<u-modal :customStyle="style" :content="content" :title="title"  :show="showContent" @confirm="() => showContent = false"></u-modal>
 		</view>
 	</view>
 </template>
@@ -44,7 +45,13 @@
 		data() {
 			return {
 				jslist: [],
-				banList: []
+				banList: [],
+				title:"",
+				content: "",
+				showContent:false,
+				style:{
+					fontSize: "10px"
+				}
 			}
 		},
 		onLoad() {
@@ -62,7 +69,7 @@
 					showCancel: false
 				})
 			},
-			getTeam(){
+			getTeam() {
 				apiCrrtTrainTeamIndex({}).then(data => {
 					console.log("首页加载", data)
 					this.jslist = data.jslist;
@@ -70,8 +77,13 @@
 				}).catch(exception => {
 					console.log("exception", exception)
 				}).finally(res => {
-				
+
 				})
+			},
+			showModal(item) {
+				this.showContent = true;
+				this.content = item.content;
+				this.title = item.name+"个人简介";
 			}
 		}
 	}

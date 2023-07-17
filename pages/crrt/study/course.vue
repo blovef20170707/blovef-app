@@ -151,45 +151,7 @@
 				params: {},
 				current: 0,
 				course: {
-					// type: "公开课",
-					// pnum: "7391人学习",
-					// title: "慢性肾病患者的管理",
-					// videoData: false,
-					// videos: [{
-					// 	url: 'https://cdn.uviewui.com/uview/resources/video.mp4',
-					// 	title: '课程1',
-					// 	poster: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-					// 	type: 'video'
-					// }],
-					// tabslist: [{
-					// 	name: '介绍',
-					// }, {
-					// 	name: '课件',
-					// }],
-					// courseintroduces: [{
-					// 	"title": "慢性肾脏病(CKD)的定义"
-					// }, {
-					// 	"title": "引起肾脏病的原因"
-					// }, {
-					// 	"title": "慢性肾脏病分期"
-					// }, {
-					// 	"title": "CKD饮食营养治疗"
-					// }],
-					// coursewares: [{
-					// 	"title": "测试1",
-					// 	"type_url": "/static/crrt/pdf.png"
-					// }, {
-					// 	"title": "测试2",
-					// 	"type_url": "/static/crrt/pdf.png"
-					// }, {
-					// 	"title": "测试3",
-					// 	"type_url": "/static/crrt/pdf.png"
-					// }],
-					// teacher: {
-					// 	"img": "https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/ltx.jpg",
-					// 	"name": "王沂芹",
-					// 	"content": "长期从事肾脏病临床、科研、教学及血液净化中心管理工作。现任全军血液净化专业委员会青年委员，重庆市医学会内科学专业委员会委员。"
-					// },
+					
 				}
 			}
 		},

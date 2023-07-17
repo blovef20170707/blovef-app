@@ -105,7 +105,7 @@
 		{
 			"path": "pages/crrt/circle/index",
 			"style": {
-				"navigationBarTitleText": "圈子",
+				"navigationBarTitleText": "动态",
 				"enablePullDownRefresh": true
 			}
 		},
@@ -235,7 +235,7 @@
 			"pagePath": "pages/crrt/circle/index",
 			"iconPath": "static/crrt/circleh.png",
 			"selectedIconPath": "static/crrt/circlel.png",
-			"text": "圈子"
+			"text": "动态"
 		}, {
 			"pagePath": "pages/me/me",
 			"iconPath": "static/crrt/meh.png",
