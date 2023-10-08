@@ -10,16 +10,14 @@
 						<u--input :disabled="disabled" v-model="model.userInfo.name" border="none" inputAlign="right"
 							placeholder="请输入姓名"></u--input>
 					</u-form-item>
-					<u-form-item required="true" label="系统编号" prop="userInfo.phone" borderBottom ref="item1">
-						<u--input :disabled="disabled" v-model="model.userInfo.phone" type="number" border="none"
-							inputAlign="right" placeholder="请输入系统编号"></u--input>
+					<u-form-item required="true" label="证件号" prop="userInfo.idcard" borderBottom ref="item1">
+						<u--input :disabled="disabled" v-model="model.userInfo.idcard" type="idcard" border="none"
+							inputAlign="right" placeholder="请输入证件号"></u--input>
 					</u-form-item>
 				</u--form>
-				<u-button v-if="model.userInfo.trainee_status == 0" type="primary" text="提交认证"
-					customStyle="margin-top: 30px" @click="submit"></u-button>
-				<u-button v-if="model.userInfo.trainee_status == 1" type="success" text="认证中"
-						customStyle="margin-top: 30px" @click="submit"></u-button>
-				<u-button disabled="true" v-if="model.userInfo.trainee_status == 2" type="primary" text="认证通过"
+				<u-button v-if="model.userInfo.user_id == ''" type="primary" text="提交认证" customStyle="margin-top: 30px"
+					@click="submit"></u-button>
+				<u-button disabled="true" v-if="model.userInfo.user_id != ''" type="primary" text="认证通过"
 					customStyle="margin-top: 30px"></u-button>
 			</view>
 			<view style="height: 10px;">
@@ -32,23 +30,18 @@
 <script>
 	import frame from '@/common/frame.js';
 	import {
-		apiCrrtTrainApplication,
-		apiCrrtTrainTrainee
+		apiCarTaxiEmployeeAuth,
+		apiCarTaxiMe
 	} from '@/common/http.api.js';
 	export default {
 		data() {
 			return {
-				showSex: false,
-				showStay: false,
-				showDegree: false,
-				showIdentity: false,
 				disabled: false,
 				model: {
 					userInfo: {
 						name: '',
-						phone: '',
-						trainee_status: 0,
-						identity: ''
+						idcard: '',
+						user_id: ''
 					},
 				},
 				rules: {
@@ -58,22 +51,22 @@
 						message: '请填写姓名',
 						trigger: ['blur', 'change']
 					}],
-					'userInfo.phone': {
+					'userInfo.idcard': {
 						type: 'number',
 						required: true,
-						message: '请输入系统编号',
+						message: '请输入证件号',
 						trigger: ['blur', 'change']
 					},
 				},
 			};
 		},
 		methods: {
-			queryTrainee() {
-				apiCrrtTrainTrainee({}).then(data => {
+			queryMe() {
+				apiCarTaxiMe({}).then(data => {
 					console.log("报名", data)
 					if (data) {
 						this.model.userInfo = data;
-						if (this.model.userInfo.trainee_status == 1) {
+						if (this.model.userInfo.user_id != '') {
 							this.disabled = true;
 						}
 					}
@@ -87,11 +80,10 @@
 				this.$refs.form1.validate().then(res => {
 					console.log(this.model.userInfo);
 					if (res) {
-						this.model.userInfo.identity = 3;
-						apiCrrtTrainApplication(this.model.userInfo).then(data => {
+						apiCarTaxiEmployeeAuth(this.model.userInfo).then(data => {
 							console.log("认证", data)
 							if (data) {
-								this.model.userInfo.trainee_status = 2;
+								this.model.userInfo.user_id = data.user_id;
 								this.disabled = true;
 								this.$refs.uToast.show({
 									message: '认证成功',
@@ -101,7 +93,7 @@
 						}).catch(exception => {
 							console.log("exception", exception)
 						}).finally(res => {
-
+							
 						})
 					}
 				}).catch(errors => {
@@ -121,7 +113,7 @@
 			this.$refs.form1.setRules(this.rules)
 		},
 		onShow() {
-			this.queryTrainee();
+			this.queryMe();
 		}
 
 	};

@@ -64,19 +64,24 @@
 						<view style="display: flex;" @click="course(item)">
 							<view style="width: 2px;">
 							</view>
-							<view style="height:80px;position: relative;padding: 0">
+							<view style="height:90px;position: relative;padding: 0">
 								<u--image radius="5" :src="item.icon" width="110px" height="80px" mode="scaleToFill">
 								</u--image>
-								<view v-if="item.live == true" class="live">
+								<view v-if="item.live == true && item.document == 'video'" class="live">
 									<view class="zb"></view>
 									<view style="margin-left:4px;">
 										<text style="font-size: 10px;">{{item.liveText}}</text>
 									</view>
 								</view>
+								<view v-if="item.document == 'file'" class="filec">
+									<view>
+										<text style="font-size: 10px;">文件</text>
+									</view>
+								</view>
 							</view>
 							<view style="width: 10px;">
 							</view>
-							<view style="width:100%;height: 80px;">
+							<view style="width:100%;height: 90px;">
 								<view>
 									<view>
 										<u--text lines="2" size="13" bold=true color="#272727"
@@ -93,12 +98,13 @@
 								</view>
 								<view style="height: 20px;"></view>
 								<view style="display: flex;font-weight:bolder;color: #8f8f8f;font-size: 12px;">
-									<view style="width: 75%;">
+									<view style="width: 65%;">
 										<text>{{item.name}}</text>
 									</view>
-									<view style="width: 25%;padding-right: 5px;">
+									<view style="width: 35%;padding-right: 5px;">
 										<view style="float: right;display: flex;">
-											<text>{{item.time}}课时</text>
+											<text v-if="item.document == 'video'">{{item.time}}课时</text>
+											<!-- <text v-if="item.type == 1">pdf</text> -->
 										</view>
 									</view>
 								</view>
@@ -133,21 +139,21 @@
 			}
 		},
 		onLoad() {
-
+			this.token = uni.getStorageSync('token');
+			console.log("onShow:" + this.token);
+			this.getIndex();
 		},
 		onUnload() {
 
 		},
 		onShow() {
-			this.token = uni.getStorageSync('token');
-			console.log("onShow:" + this.token);
-			this.getIndex();
+
 		},
 		methods: {
 			appAction(item) {
 				console.log("item", item);
 				if (!this.token) {
-					uni.$u.route('/pages/login/nopass');
+					uni.$u.route('/pages/login/login');
 				} else {
 					if (item.title == '报名入口') {
 						uni.$u.route(item.url);
@@ -168,13 +174,11 @@
 									});
 								} else {
 									if (item.title == '学习园地') {
-										console.log("222")
 										uni.$u.route({
 											"type": "switchTab",
 											"url": item.url
 										});
 									} else {
-										console.log("333")
 										uni.$u.route(item.url);
 									}
 
@@ -189,6 +193,7 @@
 				}
 			},
 			getIndex() {
+				console.log("getIndex vue")
 				apiCrrtTrainIndex({}).then(data => {
 					console.log("首页加载", data)
 					this.banList = data.banList;
@@ -211,9 +216,26 @@
 						type: 'warning'
 					});
 				} else {
-					uni.$u.route("/pages/crrt/study/course", {
-						params: JSON.stringify(item)
-					});
+					if (item.document == 'file') {
+						uni.downloadFile({
+							url: item.document_url,
+							success: function(res) {
+								console.log(res);
+								var filePath = res.tempFilePath;
+								uni.openDocument({
+									filePath: filePath,
+									showMenu: true,
+									success: function(res) {
+										console.log('打开文档成功');
+									}
+								});
+							}
+						});
+					} else if (item.document == 'video') {
+						uni.$u.route("/pages/crrt/study/course", {
+							params: JSON.stringify(item)
+						});
+					}
 				}
 			}
 		}
@@ -268,6 +290,28 @@
 		vertical-align: bottom;
 	}
 
+	.file {
+		width: 12px;
+		height: 12px;
+		background: url('/static/crrt/zb.gif') no-repeat 50%/contain;
+		vertical-align: bottom;
+	}
+
+	.filec {
+		display: flex;
+		align-items: center;
+		position: absolute;
+		top: 0px;
+		// left: 6px;
+		padding: 1px 2px;
+		border-radius: 0px 0px 4px 0px;
+		line-height: 12px;
+		font-weight: 300;
+		font-size: 10px;
+		color: #fff;
+		background-color: #f23f4e;
+	}
+
 	.live {
 		display: flex;
 		align-items: center;
@@ -275,7 +319,7 @@
 		top: 0px;
 		// left: 6px;
 		padding: 1px 2px;
-		border-radius: 4px;
+		border-radius: 5px;
 		line-height: 12px;
 		font-weight: 300;
 		font-size: 10px;

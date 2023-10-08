@@ -92,7 +92,7 @@
 			onTabItemTap() {
 				console.log('onTabItemTap');
 				if (!this.token) {
-					uni.$u.route('/pages/login/nopass');
+					uni.$u.route('/pages/login/login');
 				} else {
 					this.getCircle();
 				}

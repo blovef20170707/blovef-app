@@ -35,7 +35,7 @@
 <script>
 	import frame from '@/common/frame.js';
 	import {
-		apiCrrtTrainShareIndex
+		apiCrrtTrainCourseWare
 	} from '@/common/http.api.js';
 	export default {
 		data() {
@@ -78,7 +78,7 @@
 						"title": ""
 					}
 				};
-				apiCrrtTrainShareIndex(
+				apiCrrtTrainCourseWare(
 					json
 				).then(data => {
 					console.log("数据返回", data)
@@ -97,7 +97,7 @@
 			openAtt(obj) {
 				console.log(obj);
 				if (0 == obj.file_type) {
-					uni.$u.route("/pages/crrt/share/index", {
+					uni.$u.route("/pages/crrt/study/courseware", {
 						params: JSON.stringify(obj.id)
 					});
 				} else {
@@ -129,7 +129,7 @@
 					}
 				};
 				console.log(json)
-				apiCrrtTrainShareIndex(
+				apiCrrtTrainCourseWare(
 					json
 				).then(data => {
 					console.log("搜索返回", data)

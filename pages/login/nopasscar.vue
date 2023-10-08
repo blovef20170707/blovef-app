@@ -5,7 +5,7 @@
 		</view>
 		<view class="logo">
 			<view class="png">
-				<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/crrt/logo.png"
+				<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/car/logo.png"
 					width="200px" height="200px" mode="aspectFit">
 				</u--image>
 			</view>
@@ -36,6 +36,7 @@
 	import {
 		apiWxLogin
 	} from '@/common/http.api.js';
+	import global from "@/common/global.js";
 	export default {
 		data() {
 			return {
@@ -74,7 +75,7 @@
 								let params = {
 									"wx_code": code,
 									"login_type": 'WECHAT',
-									"app_system_key": '2b8b0222-093b-11ee-8b05-fa163e97acdc',
+									"app_system_key": global.baseUrl,
 									"wx_nick_name": nickName,
 									"wx_avatar_url": avatarUrl,
 									"wx_gender": gender,
@@ -89,7 +90,7 @@
 									console.log(uni.getStorageSync('token'))
 									uni.$u.route({
 										type: 'switchTab',
-										url: '/pages/crrt/index/index'
+										url: '/pages/car/taxi/me'
 									});
 									console.log("成功登录完成")
 								}).catch(exception => {

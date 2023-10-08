@@ -3,26 +3,16 @@
 		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
+		{
+			"path": "pages/crrt/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
 		{
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"
-			}
-		}, {
-			"path": "pages/crrt/study/courseware",
-			"style": {
-				"navigationBarTitleText": "课件"
-			}
-		}, {
-			"path": "pages/crrt/feedback/prainfo",
-			"style": {
-				"navigationBarTitleText": "调查问卷"
-			}
-		}, {
-			"path": "pages/crrt/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
 			}
 		},
 		{
@@ -40,6 +30,12 @@
 			"style": {
 				"navigationBarTitleText": "消息",
 				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
 			}
 		},
 		{
@@ -197,27 +193,29 @@
 		"fontSize": "15px",
 		"iconWidth": "24px",
 		"spacing": "3px",
-		"list": [{
-			"pagePath": "pages/crrt/index/index",
-			"iconPath": "static/crrt/homeh.png",
-			"selectedIconPath": "static/crrt/homel.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/crrt/study/index",
-			"iconPath": "static/crrt/studyh.png",
-			"selectedIconPath": "static/crrt/studyl.png",
-			"text": "学习"
-		}, {
-			"pagePath": "pages/crrt/circle/index",
-			"iconPath": "static/crrt/circleh.png",
-			"selectedIconPath": "static/crrt/circlel.png",
-			"text": "动态"
-		}, {
-			"pagePath": "pages/me/me",
-			"iconPath": "static/crrt/meh.png",
-			"selectedIconPath": "static/crrt/mel.png",
-			"text": "我的"
-		}]
+		"list": [
+			{
+				"pagePath": "pages/crrt/index/index",
+				"iconPath": "static/crrt/homeh.png",
+				"selectedIconPath": "static/crrt/homel.png",
+				"text": "首页"
+			}, {
+				"pagePath": "pages/crrt/study/index",
+				"iconPath": "static/crrt/studyh.png",
+				"selectedIconPath": "static/crrt/studyl.png",
+				"text": "学习"
+			}, {
+				"pagePath": "pages/crrt/circle/index",
+				"iconPath": "static/crrt/circleh.png",
+				"selectedIconPath": "static/crrt/circlel.png",
+				"text": "动态"
+			}, {
+				"pagePath": "pages/me/me",
+				"iconPath": "static/crrt/meh.png",
+				"selectedIconPath": "static/crrt/mel.png",
+				"text": "我的"
+			}
+		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

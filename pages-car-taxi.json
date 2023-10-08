@@ -1,0 +1,116 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/car/taxi/complain/index",
+			"style": {
+				"navigationBarTitleText": "投诉"
+			}
+		},
+		{
+			"path": "pages/car/taxi/index",
+			"style": {
+				"navigationBarTitleText": "服务"
+			}
+		},
+		{
+			"path": "pages/car/taxi/complain/agreement",
+			"style": {
+				"navigationBarTitleText": "协议"
+			}
+		},
+		{
+			"path": "pages/crrt/dev/index",
+			"style": {
+				"navigationBarTitleText": "开发中"
+			}
+		},
+		{
+			"path": "pages/car/taxi/company",
+			"style": {
+				"navigationBarTitleText": "公司"
+			}
+		},
+		{
+			"path": "pages/car/taxi/me",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/car/taxi/complain/info",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		},
+		{
+			"path": "pages/car/taxi/complain/manage",
+			"style": {
+				"navigationBarTitleText": "列表"
+			}
+		},
+		{
+			"path": "pages/car/taxi/information",
+			"style": {
+				"navigationBarTitleText": "资讯"
+			}
+		},
+		{
+			"path": "pages/car/taxi/employees/index",
+			"style": {
+				"navigationBarTitleText": "认证"
+			}
+		},
+		{
+			"path": "pages/login/nopasscar",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#7d7e7f",
+		"selectedColor": "#1296db",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"height": "40px",
+		"fontSize": "15px",
+		"iconWidth": "24px",
+		"spacing": "3px",
+		"list": [
+			{
+				"pagePath": "pages/car/taxi/complain/index",
+				"iconPath": "static/crrt/feedbackh.png",
+				"selectedIconPath": "static/crrt/feedbackl.png",
+				"text": "投诉"
+			}, 
+			{
+				"pagePath": "pages/car/taxi/index",
+				"iconPath": "static/crrt/homeh.png",
+				"selectedIconPath": "static/crrt/homel.png",
+				"text": "服务"
+			},
+			{
+				"pagePath": "pages/car/taxi/company",
+				"iconPath": "static/crrt/companyh.png",
+				"selectedIconPath": "static/crrt/companyl.png",
+				"text": "公司"
+			},
+			{
+				"pagePath": "pages/car/taxi/me",
+				"iconPath": "static/crrt/homeh.png",
+				"selectedIconPath": "static/crrt/homel.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "blovef",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#fafafa"
+	},
+	"entryPagePath": "pages/car/taxi/complain/index"
+}

@@ -214,7 +214,7 @@
 				}).catch(errors => {
 					console.log(errors)
 					this.$refs.uToast.show({
-						title: '请正确填写',
+						messsage: '请正确填写',
 						type: 'error'
 					});
 				})

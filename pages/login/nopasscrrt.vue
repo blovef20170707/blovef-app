@@ -4,7 +4,7 @@
 			<u-toast ref="uToast"></u-toast>
 			<view class="top">
 				<view class="login"><text>欢迎登录</text></view>
-				<view class="logina"><text>{{loginModel.title}}</text></view>
+				<view class="logina"><text>重庆市新桥医院专科教培平台</text></view>
 			</view>
 			<view class="logo">
 				<view class="png">
@@ -19,8 +19,8 @@
 				<view class="form">
 					<view class="submit">
 						<view style="height: 70%;">
-							<view class="btn" @click="login(0)">
-								<text class="loginc">一键登录</text>
+							<view class="btn">
+								<text class="loginc" @click="submit()">一键登录</text>
 							</view>
 							<view style="height: 5px;">
 							</view>
@@ -36,14 +36,7 @@
 
 							</view>
 							<view class="bottom">
-								<view style="width: 50%;">
-									<text v-if="loginModel.applictionSwitch == 1" class="rz"
-										@click="login(1)">立即报名</text>
-									<text v-if="loginModel.applictionSwitch == 0" class="rz"></text>
-								</view>
-								<view style="width: 50%;text-align: right;">
-									<text v-if="loginModel.emAuthSwitch == 1" class="rz" @click="login(2)">员工认证</text>
-								</view>
+								<text class="rz" @click="application()">立即报名</text> <text class="rz" @click="auth()">员工认证</text>
 							</view>
 						</view>
 					</view>
@@ -56,112 +49,91 @@
 </template>
 
 <script>
-	import global from "@/common/global.js";
 	import {
-		apiWxLogin,
-		apiCrrtTrainLoginAuth,
-		apiCrrtTrainLoginIndex,
+		apiWxLogin
 	} from '@/common/http.api.js';
+	import global from "@/common/global.js";
 	export default {
 		data() {
 			return {
-				loginModel: {}
+				border: true,
 			}
 		},
 		onLoad() {
-
+			console.log("onLoad")
 		},
 		onShow() {
-			apiCrrtTrainLoginIndex().then(data => {
-				this.loginModel = data;
-			}).catch(exception => {
-				console.log("exception", exception)
-			}).finally(res => {
-
-			})
+			console.log("onShow")
 		},
 		onReady() {
 
 		},
 		methods: {
-			application() {
+			application(){
 				uni.$u.route('/pages/crrt/application/index');
 			},
-			auth() {
+			auth(){
 				uni.$u.route('/pages/crrt/employees/index');
 			},
-			login(obj) {
+			submit() {
+				console.log('submit');
+				this.login();
+			},
+			login() {
+				console.log("login")
 				let _this = this;
-				const token = uni.getStorageSync('token');
-				if (token) {
-					if (obj == 0) {
-						apiCrrtTrainLoginAuth().then(data => {
-							uni.$u.route({
-								type: 'switchTab',
-								url: '/pages/crrt/index/index'
-							});
-						}).catch(exception => {
-							console.log("exception", exception)
-						}).finally(res => {
+				uni.getUserProfile({
+					desc: '授权获取你的昵称与头像',
+					success: function(resp) {
+						uni.login({
+							success: function(res) {
+								let code = res.code;
+								let nickName = resp.userInfo.nickName;
+								let avatarUrl = resp.userInfo.avatarUrl;
+								let country = resp.userInfo.country;
+								let province = resp.userInfo.province;
+								let city = resp.userInfo.city;
+								let gender = resp.userInfo.gender;
+								let params = {
+									"wx_code": code,
+									"login_type": 'WECHAT',
+									"app_system_key": global.baseUrl,
+									"wx_nick_name": nickName,
+									"wx_avatar_url": avatarUrl,
+									"wx_gender": gender,
+									"wx_country": country,
+									"wx_province": province,
+									"wx_city": city
+								};
+								console.log(params);
+								apiWxLogin(params).then(data => {
+									console.log("成功登录", data)
+									uni.setStorageSync('token', data.token);
+									console.log(uni.getStorageSync('token'))
+									uni.$u.route({
+										type: 'switchTab',
+										url: '/pages/crrt/index/index'
+									});
+									console.log("成功登录完成")
+								}).catch(exception => {
+									console.log("exception", exception)
+								}).finally(res => {
 
+								})
+							},
+							fail: function() {
+
+							}
 						})
-					} else if (obj == 1) {
-						uni.$u.route('/pages/crrt/application/index');
-					} else if (obj == 2) {
-						uni.$u.route('/pages/crrt/employees/index');
+					},
+					fail: function() {
+						console.log("fail getUserProfile");
+						_this.$refs.uToast.show({
+							message: '登录失败,请允许授权',
+							type: 'error'
+						})
 					}
-				} else {
-					uni.login({
-						success: function(res) {
-							let code = res.code;
-							let params = {
-								"wx_code": code,
-								"login_type": 'WECHAT',
-								"app_system_key": global.baseUrl,
-								"wx_nick_name": '',
-								"wx_avatar_url": '',
-								"wx_gender": '',
-								"wx_country": '',
-								"wx_province": '',
-								"wx_city": ''
-							};
-							console.log(params);
-							apiWxLogin(params).then(data => {
-								console.log("成功登录", data)
-								uni.setStorageSync('token', data.token);
-								console.log(uni.getStorageSync('token'))
-								if (obj == 1) {
-									uni.$u.route('/pages/crrt/application/index');
-								} else if (obj == 2) {
-									uni.$u.route('/pages/crrt/employees/index');
-								} else if (obj == 0) {
-									apiCrrtTrainLoginAuth().then(data => {
-										console.log("Auth 权限 2", data)
-										uni.$u.route({
-											type: 'switchTab',
-											url: '/pages/crrt/index/index'
-										});
-									}).catch(exception => {
-										console.log("exception", exception)
-									}).finally(res => {
-
-									})
-								}
-							}).catch(exception => {
-								console.log("exception", exception)
-							}).finally(res => {
-
-							})
-						},
-						fail: function() {
-							console.log("uni.login");
-							_this.$refs.uToast.show({
-								message: '系统错误，请联系管理员',
-								type: 'error'
-							})
-						}
-					})
-				}
+				})
 			},
 		}
 	}
@@ -250,7 +222,7 @@
 		width: 100%;
 		height: 60%;
 		display: flex;
-		// justify-content: space-between;
+		justify-content: space-between;
 	}
 
 	.form {

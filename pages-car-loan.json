@@ -1,0 +1,43 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		 {
+			"path": "pages/car/index",
+			"style": {
+				"navigationBarTitleText": "车辆评估"
+			}
+		},
+		{
+			"path": "pages/car/loan",
+			"style": {
+				"navigationBarTitleText": "最新评估"
+			}
+		},
+		{
+			"path": "pages/car/evaluation",
+			"style": {
+				"navigationBarTitleText": "评估报告"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#7d7e7f",
+		"selectedColor": "#1296db",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"height": "40px",
+		"fontSize": "15px",
+		"iconWidth": "24px",
+		"spacing": "3px",
+		"list": []
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "blovef",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#fafafa"
+	}
+	// "entryPagePath": "pages/crrt/index/index"
+}

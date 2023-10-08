@@ -6,9 +6,9 @@
 			<view style="width: 100%;background-color: white;border-radius:5px;height: 100%;">
 				<view style="height: 5px;">
 				</view>
-				<view style="display: flex;" @click="me()">
+				<view style="display: flex;">
 					<view style="width: 10px;"></view>
-					<view style="height: 50px;"><u-avatar :src="model.userInfo.avatarUrl" size="50"
+					<view style="height: 50px;" @click="me()"><u-avatar :src="model.userInfo.avatarUrl" size="50"
 							shape="square"></u-avatar></view>
 					<view style="width: 15px;"></view>
 					<view style="height: 50px;width: 100%;">
@@ -32,7 +32,7 @@
 						</view>
 						<view style="height: 15px;">
 						</view>
-						<view><text>医者，书不熟则理不明，理不明则识不精</text></view>
+						<view><text>{{model.userInfo.say}}</text></view>
 					</view>
 				</view>
 				<view style="height: 10px;">
@@ -83,6 +83,7 @@
 						avatarUrl: '',
 						information_status: 0,
 						role_type: -1,
+						say: ''
 					},
 				},
 			}
@@ -99,7 +100,7 @@
 			if (!this.token) {
 				uni.$u.route({
 					type: 'reLaunch',
-					url: '/pages/login/nopass'
+					url: '/pages/login/login'
 				});
 			} else {
 				this.queryTrainee();
