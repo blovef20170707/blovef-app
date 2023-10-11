@@ -55,7 +55,7 @@
 						<view class="ads">
 							<view class="adsc">
 								<text style="color: #7d7e7f;font-size: 13px;" class="phone-number"
-									@click="makeCall()">023-65568045</text>
+									@click="makeCall()">023-65568042</text>
 							</view>
 						</view>
 					</view>

@@ -23,7 +23,7 @@
 							inputAlign="right" placeholder="请输入电话"></u--input>
 					</u-form-item>
 					</template>
-					<u-form-item required="true" label="乘车时间" prop="complainInfo.busTime" borderBottom
+					<u-form-item required="true" label="乘车时间" prop="complainInfo.bus_time" borderBottom
 						@click="showBusTime = true; hideKeyboard()" ref="item1">
 						<u--input v-model="model.complainInfo.bus_time" disabled disabledColor="#ffffff"
 							placeholder="请选择乘车时间" inputAlign="right" border="none"></u--input>
@@ -68,9 +68,9 @@
 			<view style="height: 10px;">
 			</view>
 		</view>
-		<view>
+		<!-- <view>
 			<liu-drag-button @clickBtn="clickBtn">客服</liu-drag-button>
-		</view>
+		</view> -->
 		<u-toast ref="uToast"></u-toast>
 	</view>
 </template>
@@ -124,19 +124,7 @@
 						disabled: false
 					},
 					{
-						name: '超速',
-						disabled: false
-					},
-					{
 						name: '开车玩手机',
-						disabled: false
-					},
-					{
-						name: '闯红灯',
-						disabled: false
-					},
-					{
-						name: '疲劳驾驶',
 						disabled: false
 					},
 					{
@@ -179,7 +167,7 @@
 						message: '请正确填写车费',
 						trigger: ['blur', 'change']
 					}],
-					'complainInfo.busTime': [{
+					'complainInfo.bus_time': [{
 						type: 'string',
 						required: true,
 						message: '请正确填写乘车时间',
@@ -198,12 +186,13 @@
 		methods: {
 			busTimeClose() {
 				this.showBusTime = false
-				this.$refs.form1.validateField('complainInfo.busTime')
+				this.$refs.form1.validateField('complainInfo.bus_time')
 			},
 			busTimeConfirm(e) {
 				this.showBusTime = false
 				this.model.complainInfo.bus_time = uni.$u.timeFormat(e.value, 'yyyy-mm-dd hh-MM')
-				this.$refs.form1.validateField('complainInfo.busTime')
+				console.log(this.model.complainInfo.bus_time)
+				this.$refs.form1.validateField('complainInfo.bus_time')
 			},
 			reasonChange(e) {
 				console.log(e)
@@ -238,11 +227,10 @@
 											let province = resp.userInfo.province;
 											let city = resp.userInfo.city;
 											let gender = resp.userInfo.gender;
-											let app_system_key = global.baseUrl;
 											let params = {
 												"wx_code": code,
 												"login_type": 'WECHAT',
-												"app_system_key": app_system_key,
+												"app_system_key": global.appSystemKey,
 												"wx_nick_name": nickName,
 												"wx_avatar_url": avatarUrl,
 												"wx_gender": gender,

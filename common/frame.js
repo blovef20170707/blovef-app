@@ -262,7 +262,6 @@ const buttonClick = function(c_this, button) {
 }
 
 export default {
-	baseUrl,
 	now,
 	isArray,
 	isNull,

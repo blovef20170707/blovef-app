@@ -47,6 +47,8 @@ let crrtTrainExaminationCreateUrl = '/crrt/train/trainee/examination/create';
 let crrtTrainExaminationTopicUrl = '/crrt/train/trainee/examination/topic';
 let crrtTrainExaminationEndUrl = '/crrt/train/trainee/examination/end';
 let crrtTrainExamineUrl = '/crrt/train/examine';
+let crrtTrainInformationInfoUrl = '/crrt/train/information/info';
+
 let crrtFeedBackOpenUrl = '/crrt/train/feedback/open';
 
 let carTaxiComplainUrl = '/car/taxi/complain';
@@ -117,6 +119,9 @@ export const apiCrrtTrainSatisfactionPractice = (data) => http.get(crrtTrainSati
 export const apiCrrtTrainExamination = (data) => http.get(crrtTrainExaminationUrl, data)
 export const apiCrrtTrainTraineeExamination = (data) => http.get(crrtTrainTraineeExaminationUrl, data)
 export const apiCrrtTrainLoginAuth = (data) => http.get(crrtTrainLoginAuthUrl, data)
+export const apiCrrtTrainInformationInfo = (data) => http.get(crrtTrainInformationInfoUrl, data)
+
+
 export const apiGetMessage = (data) => http.get(getMessageUrl, data)
 //taxi
 export const apiCarTaxiComplainList = (data) => http.get(carTaxiComplainListUrl, data)

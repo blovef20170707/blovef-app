@@ -97,7 +97,7 @@
 								let params = {
 									"wx_code": code,
 									"login_type": 'WECHAT',
-									"app_system_key": global.baseUrl,
+									"app_system_key": global.appSystemKey,
 									"wx_nick_name": nickName,
 									"wx_avatar_url": avatarUrl,
 									"wx_gender": gender,

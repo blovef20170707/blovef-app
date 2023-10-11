@@ -6,7 +6,27 @@
 			<u-tabs :list="list" :current="current" @change="change">
 			</u-tabs>
 			<view v-if="current == 0">
-				<u--form labelPosition="left" :model="model" :rules="rules" ref="form1" labelWidth="auto">
+				<u--form v-if="auth == 0" labelPosition="left" :model="model" :rules="rules" ref="form1" labelWidth="auto">
+					<u-form-item label="学习方向" prop="userInfo.learning" borderBottom ref="item1">
+						<u--input  :disabled="disabled" v-model="model.userInfo.learning" border="none" inputAlign="right"
+							placeholder="请输入学习方向"></u--input>
+					</u-form-item>
+					<u-form-item label="临床实践批次" prop="userInfo.lcpc" borderBottom ref="item1">
+						<u--input  :disabled="disabled" v-model="model.userInfo.lcpc" border="none" inputAlign="right"
+							placeholder="请输入临床实践批次"></u--input>
+					</u-form-item>
+					<u-form-item label="工作服尺寸" prop="userInfo.clothes" borderBottom ref="item1">
+						<u--input :disabled="disabled" v-model="model.userInfo.clothes" border="none" inputAlign="right"
+							placeholder="请输入工作服尺寸"></u--input>
+					</u-form-item>
+					<u-form-item label="护士鞋尺码" prop="userInfo.shoes" borderBottom ref="item1">
+						<u--input :disabled="disabled" v-model="model.userInfo.shoes" border="none" inputAlign="right"
+							placeholder="请输入护士鞋尺码"></u--input>
+					</u-form-item>
+					<u-button v-if="model.userInfo.information_status == 0" type="primary" text="完善" customStyle="margin-top: 30px" @click="submit"></u-button>
+					<u-button :disabled="disabled" v-if="model.userInfo.information_status == 1" type="success" text="已完善" customStyle="margin-top: 30px"></u-button>
+				</u--form>
+				<u--form v-if="auth == 1" labelPosition="left" :model="model" :rules="rules" ref="form1" labelWidth="auto">
 					<u-form-item required="true" label="姓名" prop="userInfo.name" borderBottom ref="item1">
 						<u--input disabled v-model="model.userInfo.name" border="none" inputAlign="right"
 							placeholder="请输入姓名"></u--input>
@@ -42,6 +62,7 @@
 					<u-button v-if="model.userInfo.information_status == 0" type="primary" text="完善" customStyle="margin-top: 30px" @click="submit"></u-button>
 					<u-button :disabled="disabled" v-if="model.userInfo.information_status == 1" type="success" text="已完善" customStyle="margin-top: 30px"></u-button>
 				</u--form>
+				
 			</view>
 			<view v-if="current == 1">
 				<u-list @scrolltolower="scrolltolower(1)">
@@ -99,6 +120,7 @@
 				disabled: false,
 				asrc: '/static/crrt/avatar.png',
 				current: 0,
+				auth: 0,
 				list: [{
 					name: '信息收集',
 				}, {
@@ -188,6 +210,7 @@
 			getIndex(){
 				apiCrrtTrainDocIndex({}).then(data => {
 					console.log("首页加载", data)
+					this.auth = data.auth;
 					this.knowList = data.knowList;
 					this.rimList = data.rimList;
 				}).catch(exception => {

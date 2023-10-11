@@ -140,7 +140,7 @@
 		},
 		onLoad() {
 			this.token = uni.getStorageSync('token');
-			console.log("onShow:" + this.token);
+			console.log("onShow index:" + this.token);
 			this.getIndex();
 		},
 		onUnload() {

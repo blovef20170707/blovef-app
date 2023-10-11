@@ -20,16 +20,25 @@
 					<view class="submit">
 						<view style="height: 70%;">
 							<view class="btn" @click="login(0)">
-								<text class="loginc">一键登录</text>
+								<text class="loginc">{{loginModel.login}}</text>
 							</view>
 							<view style="height: 5px;">
 							</view>
-							<view style="margin: 0 auto;text-align: center;">
+							<view style="display: flex;">
+								<u-checkbox-group v-model="agreement" placement="column" @change="agreementChange">
+									<u-checkbox key="index" name="选中">
+									</u-checkbox>
+								</u-checkbox-group>
+								<view>
+								<text>我已阅读并同意</text><text style="color:#41a863;" @click="agree()">《个人用户服务协议及隐私政策》</text>
+								</view>
+							</view>
+							<!-- <view style="margin: 0 auto;text-align: center;">
 								<text style="font-size: 12px; color: #7d7e7f;">点击登录即代表你已阅读并同意</text>
 							</view>
 							<view style="margin: 0 auto;text-align: center;">
-								<text style="font-size: 12px; color: rgba(35, 70, 175, 1);">《个人用户服务协议》</text>
-							</view>
+								<text style="font-size: 12px; color: rgba(35, 70, 175, 1);" @click="agree()">《个人用户服务协议》</text>
+							</view> -->
 						</view>
 						<view style="height: 30%;">
 							<view style="height: 40%;">
@@ -65,13 +74,15 @@
 	export default {
 		data() {
 			return {
-				loginModel: {}
+				loginModel: {},
+				agreement: []
 			}
 		},
 		onLoad() {
 
 		},
 		onShow() {
+			console.log("login index");
 			apiCrrtTrainLoginIndex().then(data => {
 				this.loginModel = data;
 			}).catch(exception => {
@@ -84,14 +95,22 @@
 
 		},
 		methods: {
-			application() {
-				uni.$u.route('/pages/crrt/application/index');
+			agree() {
+				uni.$u.route('/pages/crrt/complain/agreement');
 			},
-			auth() {
-				uni.$u.route('/pages/crrt/employees/index');
+			agreementChange(e) {
+				console.log(e)
 			},
 			login(obj) {
 				let _this = this;
+				console.log(this.agreement.length)
+				if (this.agreement.length == 0) {
+					this.$refs.uToast.show({
+						message: '请勾选同意用户协议',
+						type: 'error'
+					});
+					return;
+				}
 				const token = uni.getStorageSync('token');
 				if (token) {
 					if (obj == 0) {
@@ -106,7 +125,14 @@
 
 						})
 					} else if (obj == 1) {
-						uni.$u.route('/pages/crrt/application/index');
+						if(this.loginModel.aurl){
+							uni.$u.route(this.loginModel.aurl);
+						}else{
+							this.$refs.uToast.show({
+								message: '已关闭',
+								type: 'error'
+							})
+						}
 					} else if (obj == 2) {
 						uni.$u.route('/pages/crrt/employees/index');
 					}
@@ -117,7 +143,7 @@
 							let params = {
 								"wx_code": code,
 								"login_type": 'WECHAT',
-								"app_system_key": global.baseUrl,
+								"app_system_key": global.appSystemKey,
 								"wx_nick_name": '',
 								"wx_avatar_url": '',
 								"wx_gender": '',
@@ -131,7 +157,14 @@
 								uni.setStorageSync('token', data.token);
 								console.log(uni.getStorageSync('token'))
 								if (obj == 1) {
-									uni.$u.route('/pages/crrt/application/index');
+									if(_this.loginModel.aurl){
+										uni.$u.route(this.loginModel.aurl);
+									}else{
+										_this.$refs.uToast.show({
+											message: '已关闭',
+											type: 'error'
+										})
+									}
 								} else if (obj == 2) {
 									uni.$u.route('/pages/crrt/employees/index');
 								} else if (obj == 0) {

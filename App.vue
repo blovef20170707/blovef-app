@@ -23,7 +23,7 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			const token = uni.getStorageSync('token');
-			console.log(token);
+			console.log("token:"+token);
 			if (token) {
 				console.log("index");
 				if (global.appName == "crrtTrain") {
@@ -55,10 +55,11 @@
 				}
 			} else {
 				console.log("login");
-				uni.$u.route({
-					type: 'reLaunch',
-					url: '/pages/login/login'
-				});
+				// 因为首页是登录，这里不用再次
+				// uni.$u.route({
+				// 	type: 'reLaunch',
+				// 	url: '/pages/login/login'
+				// });
 			}
 		},
 		onShow: function() {

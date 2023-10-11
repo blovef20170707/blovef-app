@@ -3,7 +3,6 @@
 		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-
 		{
 			"path": "pages/login/login",
 			"style": {
@@ -186,6 +185,12 @@
 			"style": {
 				"navigationBarTitleText": "课程"
 			}
+		},
+		{
+			"path": "pages/crrt/complain/agreement",
+			"style": {
+				"navigationBarTitleText": "协议"
+			}
 		}
 	],
 	"tabBar": {
@@ -224,6 +229,6 @@
 		"navigationBarTitleText": "blovef",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#fafafa"
-	},
-	"entryPagePath": "pages/crrt/index/index"
+	}
+	// "entryPagePath": "pages/crrt/index/index"
 }

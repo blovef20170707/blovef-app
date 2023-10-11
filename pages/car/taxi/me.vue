@@ -38,7 +38,7 @@
 					<u-cell title="我的身份" :value="model.userInfo.identityLable" icon="/static/crrt/me_hy.png"></u-cell>
 					<u-cell title="员工认证" v-if="model.userInfo.auth == 1" isLink url="/pages/car/taxi/employees/index"
 						icon="/static/crrt/me_em.png"></u-cell>
-					<u-cell v-if="model.userInfo.role_type == 3" title="投诉管理" isLink
+					<u-cell v-if="model.userInfo.role_type == 1" title="投诉管理" isLink
 						url="/pages/car/taxi/complain/manage" icon="/static/crrt/bmsp.png"></u-cell>
 				</u-cell-group>
 			</view>
