@@ -47,10 +47,15 @@
 							}
 						}
 					});
+				} else if(global.appName == "taxi"){
+					uni.$u.route({
+						type: 'switchTab',
+						url: '/pages/car/taxi/complain/index'
+					});
 				} else {
 					uni.$u.route({
 						type: 'switchTab',
-						url: '/pages/crrt/index/index'
+						url: '/pages/index/index'
 					});
 				}
 			} else {

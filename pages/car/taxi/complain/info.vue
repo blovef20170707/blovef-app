@@ -41,6 +41,10 @@
 						<u--textarea :disabled="disabled" placeholder="请输入建议反馈" border="bottom"
 							v-model="model.complainInfo.remark" count></u--textarea>
 					</u-form-item>
+					<u-button disabled="true" v-if="model.complainInfo.submit_status == 1" type="primary" text="已提交"
+						customStyle="margin-top: 30px"></u-button>
+					<u-button disabled="true" v-if="model.complainInfo.submit_status == 2" type="success" text="已结单"
+						customStyle="margin-top: 30px"></u-button>
 				</u--form>
 			</view>
 			<view style="height: 10px;">
@@ -78,7 +82,7 @@
 						reasonList: [],
 						reasons: '',
 						remark: '',
-						submitStatus: 0
+						submit_status: 1
 					},
 				},
 			};
@@ -99,6 +103,15 @@
 				}).finally(res => {
 					
 				})
+			},
+			sumbit(){
+				apiCarTaxiHandle(params).then(data => {
+					console.log("处理完成", data)
+				}).catch(exception => {
+					console.log("exception", exception)
+				}).finally(res => {
+				
+				})
 			}
 		},
 		onReady() {
@@ -108,13 +121,14 @@
 		onLoad(option) {
 			console.log("onLoad option", option);
 			this.params = JSON.parse(option.params);
-		},
-		onShow(option) {
 			console.log("onShow params", this.params);
 			this.token = uni.getStorageSync('token');
 			console.log("onShow:" + this.token);
 			this.complain_id = this.params.id
 			this.queryComplainInfo();
+		},
+		onShow(option) {
+			
 		}
 	};
 </script>

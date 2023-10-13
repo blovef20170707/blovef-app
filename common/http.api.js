@@ -48,7 +48,6 @@ let crrtTrainExaminationTopicUrl = '/crrt/train/trainee/examination/topic';
 let crrtTrainExaminationEndUrl = '/crrt/train/trainee/examination/end';
 let crrtTrainExamineUrl = '/crrt/train/examine';
 let crrtTrainInformationInfoUrl = '/crrt/train/information/info';
-
 let crrtFeedBackOpenUrl = '/crrt/train/feedback/open';
 
 let carTaxiComplainUrl = '/car/taxi/complain';
@@ -59,6 +58,10 @@ let carTaxiMeUrl = '/car/taxi/me';
 let carTaxiAuthUrl = '/car/taxi/auth';
 let carTaxiEmployeeAuthUrl = '/car/taxi/employee/auth';
 let carTaxiIndexUrl = '/car/taxi/index';
+let carTaxiComplainByMeListUrl = '/car/taxi/complain/me';
+let carTaxiComplainHandleUrl = '/car/taxi/complain/handle';
+
+
 
 // post请求
 //base
@@ -87,8 +90,9 @@ export const apiCrrtTrainExaminationEnd = (params, config = {}) => http.post(crr
 export const apiCrrtTrainExamine = (params, config = {}) => http.post(crrtTrainExamineUrl, params, config)
 export const apiCrrtFeedBackOpen = (params, config = {}) => http.post(crrtFeedBackOpenUrl, params, config)
 //taxi
-export const apiTaxiComplain= (params, config = {}) => http.post(carTaxiComplainUrl, params, config)
-export const apiCarTaxiEmployeeAuth= (params, config = {}) => http.post(carTaxiEmployeeAuthUrl, params, config)
+export const apiTaxiComplain = (params, config = {}) => http.post(carTaxiComplainUrl, params, config)
+export const apiCarTaxiEmployeeAuth = (params, config = {}) => http.post(carTaxiEmployeeAuthUrl, params, config)
+export const apiCarTaxiComplainHandle = (params, config = {}) => http.post(carTaxiComplainHandleUrl, params, config)
 
 
 
@@ -130,6 +134,7 @@ export const apiCarTaxiInformationInfo = (data) => http.get(carTaxiInformationIn
 export const apiCarTaxiMe = (data) => http.get(carTaxiMeUrl, data)
 export const apiCarTaxiIndex = (data) => http.get(carTaxiIndexUrl, data)
 export const apiCarTaxiAuth = (data) => http.get(carTaxiAuthUrl, data)
+export const apiCarTaxiComplainByMeList = (params, config = {}) => http.get(carTaxiComplainByMeListUrl, params, config)
 
 /**
  * 使用custom写法

@@ -3,7 +3,7 @@
 		<view class="container">
 			<view style="height: 5px;">
 			</view>
-			<view>
+			<view v-if="model.userInfo.auth == 1">
 				<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
 				<u--form labelPosition="left" :model="model" :rules="rules" ref="form1" labelWidth="auto">
 					<u-form-item required="true" label="身份" prop="userInfo.identity" borderBottom

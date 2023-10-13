@@ -4,8 +4,8 @@ module.exports = (vm) => {
     uni.$u.http.setConfig((config) => {
         /* config 为默认全局配置*/	
         // config.baseURL = 'http://localhost:62688'; /* 根域名 */
-		config.baseURL = 'https://crrt.blovef.com'; /* 根域名 */
-		// config.baseURL = 'https://taxi.blovef.com'; /* 根域名 */
+		// config.baseURL = 'https://crrt.blovef.com'; /* 根域名 */
+		config.baseURL = 'https://taxi.blovef.com'; /* 根域名 */
         return config;
     })
 	

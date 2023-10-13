@@ -19,7 +19,11 @@
 				<view class="form">
 					<view class="submit">
 						<view style="height: 70%;">
-							<view class="btn" @click="login(0)">
+							<view style="text-align: center;">
+								<text style="color:#5f4bff;">仅限于专科班内部用户登录使用</text>
+							</view>
+							<view style="height: 5px;"></view>
+							<view class="btn" @click="showModal()">
 								<text class="loginc">{{loginModel.login}}</text>
 							</view>
 							<view style="height: 5px;">
@@ -30,7 +34,8 @@
 									</u-checkbox>
 								</u-checkbox-group>
 								<view>
-								<text>我已阅读并同意</text><text style="color:#41a863;" @click="agree()">《个人用户服务协议及隐私政策》</text>
+									<text>我已阅读并同意</text><text style="color:#41a863;"
+										@click="agree()">《个人用户服务协议及隐私政策》</text>
 								</view>
 							</view>
 							<!-- <view style="margin: 0 auto;text-align: center;">
@@ -45,18 +50,20 @@
 
 							</view>
 							<view class="bottom">
-								<view style="width: 50%;">
+								<view style="width: 50%;" @click="login(1)">
 									<text v-if="loginModel.applictionSwitch == 1" class="rz"
-										@click="login(1)">立即报名</text>
+										>立即报名</text>
 									<text v-if="loginModel.applictionSwitch == 0" class="rz"></text>
 								</view>
-								<view style="width: 50%;text-align: right;">
-									<text v-if="loginModel.emAuthSwitch == 1" class="rz" @click="login(2)">员工认证</text>
+								<view style="width: 50%;text-align: right;"  @click="login(2)">
+									<text v-if="loginModel.emAuthSwitch == 1" class="rz">员工认证</text>
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
+				<u-modal :content="content" :show="show3" showCancelButton closeOnClickOverlay @confirm="confirm"
+					@cancel="cancel" @close="close"></u-modal>
 				<u-toast ref="uToast" />
 			</view>
 		</view>
@@ -75,7 +82,9 @@
 		data() {
 			return {
 				loginModel: {},
-				agreement: []
+				agreement: [],
+				show3: false,
+				content: "请您知晓：该小程序仅限于专科班内部学员或员工登录使用。"
 			}
 		},
 		onLoad() {
@@ -95,6 +104,21 @@
 
 		},
 		methods: {
+			showModal(){
+				this.show3 = true;
+			},
+			confirm() {
+				this.show3 = false;
+				this.login(0);
+			},
+			cancel() {
+				this.show3 = false
+				console.log('cancel');
+			},
+			close() {
+				this.show3 = false
+				console.log('close');
+			},
 			agree() {
 				uni.$u.route('/pages/crrt/complain/agreement');
 			},
@@ -104,10 +128,11 @@
 			login(obj) {
 				let _this = this;
 				console.log(this.agreement.length)
-				if (this.agreement.length == 0) {
+				if (obj == 0 && this.agreement.length == 0) {
 					this.$refs.uToast.show({
 						message: '请勾选同意用户协议',
-						type: 'error'
+						type: 'error',
+						duration: 3000
 					});
 					return;
 				}
@@ -125,9 +150,9 @@
 
 						})
 					} else if (obj == 1) {
-						if(this.loginModel.aurl){
+						if (this.loginModel.aurl) {
 							uni.$u.route(this.loginModel.aurl);
-						}else{
+						} else {
 							this.$refs.uToast.show({
 								message: '已关闭',
 								type: 'error'
@@ -157,9 +182,10 @@
 								uni.setStorageSync('token', data.token);
 								console.log(uni.getStorageSync('token'))
 								if (obj == 1) {
-									if(_this.loginModel.aurl){
-										uni.$u.route(this.loginModel.aurl);
-									}else{
+									console.log(_this.loginModel.aurl)
+									if (_this.loginModel.aurl) {
+										uni.$u.route(_this.loginModel.aurl);
+									} else {
 										_this.$refs.uToast.show({
 											message: '已关闭',
 											type: 'error'

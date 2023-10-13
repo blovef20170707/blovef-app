@@ -4,192 +4,81 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/login/login",
+			"path": "pages/car/taxi/complain/index",
 			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		}, {
-			"path": "pages/crrt/study/courseware",
-			"style": {
-				"navigationBarTitleText": "课件"
-			}
-		}, {
-			"path": "pages/crrt/feedback/prainfo",
-			"style": {
-				"navigationBarTitleText": "调查问卷"
-			}
-		}, {
-			"path": "pages/crrt/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "投诉"
 			}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/car/taxi/complain/success",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "投诉成功"
 			}
-		}, {
-			"path": "pages/me/me",
+		},
+		{
+			"path": "pages/car/taxi/complain/me",
+			"style": {
+				"navigationBarTitleText": "我的投诉"
+			}
+		},
+		{
+			"path": "pages/car/taxi/index",
+			"style": {
+				"navigationBarTitleText": "服务"
+			}
+		},
+		{
+			"path": "pages/car/taxi/complain/agreement",
+			"style": {
+				"navigationBarTitleText": "协议"
+			}
+		},
+		{
+			"path": "pages/crrt/dev/index",
+			"style": {
+				"navigationBarTitleText": "开发中"
+			}
+		},
+		{
+			"path": "pages/car/taxi/company",
+			"style": {
+				"navigationBarTitleText": "公司"
+			}
+		},
+		{
+			"path": "pages/car/taxi/me",
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
-		}, {
-			"path": "pages/message/indexcard",
+		},
+		{
+			"path": "pages/car/taxi/complain/info",
 			"style": {
-				"navigationBarTitleText": "消息",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "详情"
 			}
 		},
 		{
-			"path": "pages/menu/menu",
+			"path": "pages/car/taxi/complain/manage",
 			"style": {
-				"navigationBarTitleText": "菜单",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "投诉处理"
 			}
 		},
 		{
-			"path": "pages/page/list",
+			"path": "pages/car/taxi/information",
 			"style": {
-				"navigationBarTitleText": "列表",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "资讯"
 			}
 		},
 		{
-			"path": "pages/page/card",
+			"path": "pages/car/taxi/employees/index",
 			"style": {
-				"navigationBarTitleText": "列表",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "认证"
 			}
 		},
 		{
-			"path": "pages/page/card1",
+			"path": "pages/login/nopasscar",
 			"style": {
-				"navigationBarTitleText": "列表",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/page/details",
-			"style": {
-				"navigationBarTitleText": "详情",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/page/upload",
-			"style": {
-				"navigationBarTitleText": "上传列表",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/crrt/circle/index",
-			"style": {
-				"navigationBarTitleText": "动态",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/crrt/study/index",
-			"style": {
-				"navigationBarTitleText": "学习"
-			}
-		},
-		{
-			"path": "pages/crrt/application/index",
-			"style": {
-				"navigationBarTitleText": "报名"
-			}
-		},
-		{
-			"path": "pages/crrt/guide/index",
-			"style": {
-				"navigationBarTitleText": "指南"
-			}
-		},
-		{
-			"path": "pages/crrt/feedback/index",
-			"style": {
-				"navigationBarTitleText": "调查问卷"
-			}
-		},
-		{
-			"path": "pages/crrt/feedback/info",
-			"style": {
-				"navigationBarTitleText": "调查问卷"
-			}
-		},
-		{
-			"path": "pages/crrt/examination/index",
-			"style": {
-				"navigationBarTitleText": "在线考试"
-			}
-		},
-		{
-			"path": "pages/crrt/examination/info",
-			"style": {
-				"navigationBarTitleText": "在线考试"
-			}
-		},
-		{
-			"path": "pages/crrt/team/index",
-			"style": {
-				"navigationBarTitleText": "师资队伍"
-			}
-		},
-		{
-			"path": "pages/crrt/examine/index",
-			"style": {
-				"navigationBarTitleText": "审批报名"
-			}
-		},
-		{
-			"path": "pages/crrt/feedback/open",
-			"style": {
-				"navigationBarTitleText": "开通反馈"
-			}
-		},
-		{
-			"path": "pages/crrt/timeable/index",
-			"style": {
-				"navigationBarTitleText": "课表"
-			}
-		},
-		{
-			"path": "pages/crrt/employees/index",
-			"style": {
-				"navigationBarTitleText": "员工认证"
-			}
-		},
-		{
-			"path": "pages/crrt/vip/index",
-			"style": {
-				"navigationBarTitleText": "我的会员"
-			}
-		},
-		{
-			"path": "pages/crrt/share/index",
-			"style": {
-				"navigationBarTitleText": "分享乐园"
-			}
-		},
-		{
-			"path": "pages/crrt/scientific/index",
-			"style": {
-				"navigationBarTitleText": "科研成果"
-			}
-		},
-		{
-			"path": "pages/crrt/study/course",
-			"style": {
-				"navigationBarTitleText": "课程"
-			}
-		},
-		{
-			"path": "pages/crrt/complain/agreement",
-			"style": {
-				"navigationBarTitleText": "协议"
+				"navigationBarTitleText": "登录"
 			}
 		}
 	],
@@ -202,33 +91,38 @@
 		"fontSize": "15px",
 		"iconWidth": "24px",
 		"spacing": "3px",
-		"list": [{
-			"pagePath": "pages/crrt/index/index",
-			"iconPath": "static/crrt/homeh.png",
-			"selectedIconPath": "static/crrt/homel.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/crrt/study/index",
-			"iconPath": "static/crrt/studyh.png",
-			"selectedIconPath": "static/crrt/studyl.png",
-			"text": "学习"
-		}, {
-			"pagePath": "pages/crrt/circle/index",
-			"iconPath": "static/crrt/circleh.png",
-			"selectedIconPath": "static/crrt/circlel.png",
-			"text": "动态"
-		}, {
-			"pagePath": "pages/me/me",
-			"iconPath": "static/crrt/meh.png",
-			"selectedIconPath": "static/crrt/mel.png",
-			"text": "我的"
-		}]
+		"list": [
+			{
+				"pagePath": "pages/car/taxi/complain/index",
+				"iconPath": "static/crrt/feedbackh.png",
+				"selectedIconPath": "static/crrt/feedbackl.png",
+				"text": "投诉"
+			}, 
+			{
+				"pagePath": "pages/car/taxi/index",
+				"iconPath": "static/crrt/homeh.png",
+				"selectedIconPath": "static/crrt/homel.png",
+				"text": "服务"
+			},
+			{
+				"pagePath": "pages/car/taxi/company",
+				"iconPath": "static/crrt/companyh.png",
+				"selectedIconPath": "static/crrt/companyl.png",
+				"text": "公司"
+			},
+			{
+				"pagePath": "pages/car/taxi/me",
+				"iconPath": "static/crrt/homeh.png",
+				"selectedIconPath": "static/crrt/homel.png",
+				"text": "我的"
+			}
+		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "blovef",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#fafafa"
-	}
-	// "entryPagePath": "pages/crrt/index/index"
+	},
+	"entryPagePath": "pages/car/taxi/complain/index"
 }

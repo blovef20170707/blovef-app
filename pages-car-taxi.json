@@ -10,6 +10,18 @@
 			}
 		},
 		{
+			"path": "pages/car/taxi/complain/success",
+			"style": {
+				"navigationBarTitleText": "投诉成功"
+			}
+		},
+		{
+			"path": "pages/car/taxi/complain/me",
+			"style": {
+				"navigationBarTitleText": "我的投诉"
+			}
+		},
+		{
 			"path": "pages/car/taxi/index",
 			"style": {
 				"navigationBarTitleText": "服务"
@@ -48,7 +60,7 @@
 		{
 			"path": "pages/car/taxi/complain/manage",
 			"style": {
-				"navigationBarTitleText": "列表"
+				"navigationBarTitleText": "投诉处理"
 			}
 		},
 		{
