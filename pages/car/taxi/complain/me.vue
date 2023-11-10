@@ -56,10 +56,10 @@
 							<view style="height: 2px;">
 							</view>
 							<view style="display: flex;">
-								<view style="width: 55%;">
-									
+								<view style="width: 85%;">
+									<text>{{item.handle}}</text>
 								</view>
-								<view style="width: 45%;">
+								<view style="width: 15%;">
 									<view style="float: right;display: flex;padding-right: 3px">
 										<text v-if="item.submit_status == 1" style="color: #0881d7">已提交</text>
 										<text v-if="item.submit_status == 2" style="color: #00b26a">已结单</text>
@@ -111,6 +111,7 @@
 				})
 			},
 			fillIn(obj){
+				obj.source = "me";
 				uni.$u.route("/pages/car/taxi/complain/info", {
 					params: JSON.stringify(obj)
 				});

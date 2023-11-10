@@ -27,7 +27,7 @@
 						<u--input :disabled="disabled" v-model="model.complainInfo.fare" type="number"
 							inputAlign="right" border="none" placeholder="请输入车费"></u--input>
 					</u-form-item>
-					<u-form-item labelPosition="top" required="true" label="投诉原因" prop="complainInfo.reason"
+					<u-form-item labelPosition="top" borderBottom required="true" label="投诉原因" prop="complainInfo.reason"
 						ref="item3">
 						<!-- <u-checkbox-group :disabled="disabled" v-model="model.complainInfo.reason" shape="square"
 							@change="reasonChange" iconPlacement="right" placement="column" borderBottom>
@@ -37,14 +37,22 @@
 						</u-checkbox-group> -->
 						<u--text :text="model.complainInfo.reasons"></u--text>
 					</u-form-item>
-					<u-form-item label="建议反馈" borderBottom>
-						<u--textarea :disabled="disabled" placeholder="请输入建议反馈" border="bottom"
-							v-model="model.complainInfo.remark" count></u--textarea>
+					<u-form-item label="建议反馈" labelPosition="top" borderBottom>
+						<u--text :text="model.complainInfo.remark==''?'无':model.complainInfo.remark"></u--text>
 					</u-form-item>
-					<u-button disabled="true" v-if="model.complainInfo.submit_status == 1" type="primary" text="已提交"
-						customStyle="margin-top: 30px"></u-button>
+					<u-form-item v-if="params.source == 'manage'" label="处理意见" borderBottom>
+						<u--textarea :disabled="model.complainInfo.submit_status == 2" placeholder="请输入处理意见"
+							border="bottom" v-model="model.complainInfo.handle" count></u--textarea>
+					</u-form-item>
+					<u-form-item labelPosition="top" v-if="params.source == 'me'" label="处理意见" borderBottom>
+						<u--text :text="model.complainInfo.handle"></u--text>
+					</u-form-item>
+					<u-button disabled="true" v-if="model.complainInfo.submit_status == 1 && params.source == 'me'" type="primary" text="待反馈"
+						customStyle="margin-top: 20px"></u-button>
+					<u-button v-if="model.complainInfo.submit_status == 1 && params.source == 'manage'" type="error" text="结单"
+						customStyle="margin-top: 20px" @click="end(model.complainInfo)"></u-button>
 					<u-button disabled="true" v-if="model.complainInfo.submit_status == 2" type="success" text="已结单"
-						customStyle="margin-top: 30px"></u-button>
+						customStyle="margin-top: 20px"></u-button>
 				</u--form>
 			</view>
 			<view style="height: 10px;">
@@ -58,7 +66,8 @@
 	import frame from '@/common/frame.js';
 	import dragButton from "@/components/drag-button/drag-button.vue";
 	import {
-		apiCarTaxiComplainInfo
+		apiCarTaxiComplainInfo,
+		apiCarTaxiComplainHandle
 	} from '@/common/http.api.js';
 	export default {
 		components: {
@@ -69,10 +78,12 @@
 				showBusTime: false,
 				busTime: Number(new Date()),
 				disabled: true,
+				handledis: false,
 				token: '',
 				params: '',
 				model: {
 					complainInfo: {
+						id: '',
 						name: '',
 						plate: '',
 						phone: '',
@@ -82,6 +93,7 @@
 						reasonList: [],
 						reasons: '',
 						remark: '',
+						handle: '',
 						submit_status: 1
 					},
 				},
@@ -101,21 +113,45 @@
 				}).catch(exception => {
 					console.log("exception", exception)
 				}).finally(res => {
-					
+
 				})
 			},
-			sumbit(){
-				apiCarTaxiHandle(params).then(data => {
-					console.log("处理完成", data)
+			end(obj) {
+				if(this.isNull(obj.handle)) {
+					this.$refs.uToast.show({
+						message: '请输入处理意见',
+						type: 'error'
+					});
+					return;
+				}
+				apiCarTaxiComplainHandle({
+					"id": obj.id,
+					"handle": obj.handle
+				}).then(data => {
+					obj.submit_status = 2;
+					this.$refs.uToast.show({
+						message: '结单成功',
+						type: 'success'
+					});
 				}).catch(exception => {
 					console.log("exception", exception)
 				}).finally(res => {
-				
+
 				})
+			},
+			isNull(obj) {
+				if (obj == null || obj == undefined || obj == '') {
+					return true;
+				} else if (!obj) {
+					return true;
+				} else {
+					return false;
+				}
 			}
+
 		},
 		onReady() {
-			
+
 		},
 		// 第一次进入加载，参数可来源于菜单
 		onLoad(option) {
@@ -128,7 +164,7 @@
 			this.queryComplainInfo();
 		},
 		onShow(option) {
-			
+
 		}
 	};
 </script>

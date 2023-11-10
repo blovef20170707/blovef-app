@@ -76,9 +76,21 @@
 			}
 		},
 		{
-			"path": "pages/login/nopasscar",
+			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/car/taxi/examination/index",
+			"style": {
+				"navigationBarTitleText": "考试"
+			}
+		},
+		{
+			"path": "pages/car/taxi/examination/info",
+			"style": {
+				"navigationBarTitleText": "在线考试"
 			}
 		}
 	],

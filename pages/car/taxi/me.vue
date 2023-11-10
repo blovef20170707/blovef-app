@@ -83,9 +83,10 @@
 			this.token = uni.getStorageSync('token');
 			console.log("onShow:" + this.token);
 			if (!this.token) {
+				console.log("onShow:" + this.token);
 				uni.$u.route({
 					type: 'reLaunch',
-					url: '/pages/login/nopasscar'
+					url: '/pages/login/login'
 				});
 			} else {
 				this.queryMe();

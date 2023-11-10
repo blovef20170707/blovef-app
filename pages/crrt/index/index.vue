@@ -49,7 +49,7 @@
 					<view style="width: 60%;"><text
 							style="font-size: 12px;font-weight:bolder;color: #272727;">推荐课程</text></view>
 					<view style="width: 40%;">
-						<view style="float: right;display: flex;padding-right: 5px;">
+						<view style="float: right;display: flex;padding-right: 5px;" @click="lookall()">
 							<text style="font-size: 12px;">查看全部</text><u-icon name="arrow-right" size="12"></u-icon>
 						</view>
 					</view>
@@ -191,6 +191,12 @@
 						})
 					}
 				}
+			},
+			lookall(){
+				uni.$u.route({
+					"type": "switchTab",
+					"url": "/pages/crrt/study/index"
+				});
 			},
 			getIndex() {
 				console.log("getIndex vue")

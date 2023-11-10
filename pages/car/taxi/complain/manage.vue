@@ -58,16 +58,24 @@
 								<view style="height: 2px;">
 								</view>
 								<view style="display: flex;">
-									<view style="width: 55%;">
+									<!-- <view style="width: 55%;">
 										<view style="float: left;display: flex;padding-left: 3px;">
 											<u-button text="详情" size="mini" :plain="true" type="success"
 												@click="fillIn(item)"></u-button>
 										</view>
+									</view> -->
+									<!-- <view style="width: 45%;">
+										<view style="float: right;display: flex;padding-right: 3px">
+											<u-button text="结单" size="mini" :plain="true" type="primary"
+												@click="openR(item)"></u-button>
+										</view>
+									</view> -->
+									<view style="width: 55%;">
 									</view>
 									<view style="width: 45%;">
 										<view style="float: right;display: flex;padding-right: 3px">
-											<u-button text="结单" size="mini" :plain="true" type="primary"
-												@click="end(item)"></u-button>
+											<u-button text="详情" size="mini" :plain="true" type="success"
+												@click="fillIn(item)"></u-button>
 										</view>
 									</view>
 								</view>
@@ -94,14 +102,10 @@
 	export default {
 		data() {
 			return {
-				list: [{
-					id: '',
-					name: '',
-					plate: '',
-					phone: '',
-					bus_time: '',
-					submit_status: 0
-				}, ],
+				list: [],
+				show: false,
+				remark: '',
+				model: {}
 			};
 		},
 		methods: {
@@ -118,20 +122,19 @@
 				})
 			},
 			fillIn(obj) {
+				obj.source = "manage";
 				uni.$u.route("/pages/car/taxi/complain/info", {
 					params: JSON.stringify(obj)
 				});
 			},
-			end(obj) {
-				apiCarTaxiComplainHandle({
-					"id": obj.id
-				}).then(data => {
-					obj.submit_status = 2;
-				}).catch(exception => {
-					console.log("exception", exception)
-				}).finally(res => {
-
-				})
+			openR(obj) {
+				this.show = true;
+				this.model = obj;
+			},
+			cancel() {
+				this.show = false;
+				this.remark = '';
+				this.model = {};
 			}
 		},
 		onReady() {

@@ -10,11 +10,10 @@ let setBatchControlContextUrl = '/page/setBatchControlContext';
 let nodeActionUrl = '/api/v1/nodeAction';
 let getMenuUrl = '/sys/getMenu';
 let getMessageUrl = '/sys/getMessage';
-
 let evaluationUrl = '/carSuit/evaluation';
 let evaluationReportUrl = '/carSuit/evaluationReport';
 let queryLoanArrayUrl = '/carSuit/queryLoan';
-
+//crrt
 let crrtTrainLoginAuthUrl = '/crrt/train/login/auth';
 let crrtTrainLoginIndexUrl = '/crrt/train/login/index';
 let crrtTrainIndexUrl = '/crrt/train/index';
@@ -25,7 +24,6 @@ let crrtTrainShareIndexUrl = '/crrt/train/share/index';
 let crrtTrainScientificIndexUrl = '/crrt/train/scientific/index';
 let crrtTrainCourseIndexUrl = '/crrt/train/course/index';
 let crrtTrainCourseWareUrl = '/crrt/train/course/ware';
-
 let crrtTrainDocUrl = '/crrt/train/doc/index';
 let crrtTrainApplicationUrl = '/crrt/train/application';
 let crrtTrainTraineeUrl = '/crrt/train/trainee';
@@ -34,13 +32,10 @@ let crrtTrainPerfectUrl = '/crrt/train/perfect';
 let crrtTrainCourseUrl = '/crrt/train/course';
 let crrtTrainCourseSearchUrl = '/crrt/train/course/search';
 let crrtTrainFeedBackCourseUrl = '/crrt/train/feedback/course';
-
 let crrtTrainFeedBackUrl = '/crrt/train/feedback';
 let crrtTrainSatisfactionUrl = '/crrt/train/satisfaction';
-
 let crrtTrainFeedBackPracticeUrl = '/crrt/train/feedback/practice';
 let crrtTrainSatisfactionPracticeUrl = '/crrt/train/satisfaction/practice';
-
 let crrtTrainExaminationUrl = '/crrt/train/examination';
 let crrtTrainTraineeExaminationUrl = '/crrt/train/trainee/examination';
 let crrtTrainExaminationCreateUrl = '/crrt/train/trainee/examination/create';
@@ -49,7 +44,7 @@ let crrtTrainExaminationEndUrl = '/crrt/train/trainee/examination/end';
 let crrtTrainExamineUrl = '/crrt/train/examine';
 let crrtTrainInformationInfoUrl = '/crrt/train/information/info';
 let crrtFeedBackOpenUrl = '/crrt/train/feedback/open';
-
+//taxi
 let carTaxiComplainUrl = '/car/taxi/complain';
 let carTaxiComplainListUrl = '/car/taxi/complain/list';
 let carTaxiComplainInfoUrl = '/car/taxi/complain/info';
@@ -61,7 +56,11 @@ let carTaxiIndexUrl = '/car/taxi/index';
 let carTaxiComplainByMeListUrl = '/car/taxi/complain/me';
 let carTaxiComplainHandleUrl = '/car/taxi/complain/handle';
 
-
+let carTaxiExaminationCreateUrl = '/car/taxi/examination/create';
+let carTaxiExaminationUrl = '/car/taxi/examination';
+let carTaxiExaminationTopicUrl = '/car/taxi/examination/topic';
+let carTaxiExaminationEndUrl = '/car/taxi/examination/end';
+let carTaxiEmployeeExaminationUrl = '/car/taxi/examination/employee';
 
 // post请求
 //base
@@ -81,9 +80,7 @@ export const apiQueryLoanArray = (params, config = {custom: {toast: false}}) => 
 export const apiCrrtTrainApplication = (params, config = {}) => http.post(crrtTrainApplicationUrl, params, config)
 export const apiCrrtTrainPerfect = (params, config = {}) => http.post(crrtTrainPerfectUrl, params, config)
 export const apiCrrtTrainFeedBack = (params, config = {}) => http.post(crrtTrainFeedBackUrl, params, config)
-
 export const apiCrrtTrainFeedBackPractice = (params, config = {}) => http.post(crrtTrainFeedBackPracticeUrl, params, config)
-
 export const apiCrrtTrainExaminationCreate = (params, config = {}) => http.post(crrtTrainExaminationCreateUrl, params, config)
 export const apiCrrtTrainExaminationTopic = (params, config = {}) => http.post(crrtTrainExaminationTopicUrl, params, config)
 export const apiCrrtTrainExaminationEnd = (params, config = {}) => http.post(crrtTrainExaminationEndUrl, params, config)
@@ -93,11 +90,9 @@ export const apiCrrtFeedBackOpen = (params, config = {}) => http.post(crrtFeedBa
 export const apiTaxiComplain = (params, config = {}) => http.post(carTaxiComplainUrl, params, config)
 export const apiCarTaxiEmployeeAuth = (params, config = {}) => http.post(carTaxiEmployeeAuthUrl, params, config)
 export const apiCarTaxiComplainHandle = (params, config = {}) => http.post(carTaxiComplainHandleUrl, params, config)
-
-
-
-
-
+export const apiCarTaxiExaminationCreate = (params, config = {}) => http.post(carTaxiExaminationCreateUrl, params, config)
+export const apiCarTaxiExaminationTopic = (params, config = {}) => http.post(carTaxiExaminationTopicUrl, params, config)
+export const apiCarTaxiExaminationEnd = (params, config = {}) => http.post(carTaxiExaminationEndUrl, params, config)
 
 // get请求 注意：get请求的配置等，都在第二个参数中，详见前面解释
 //base
@@ -134,7 +129,9 @@ export const apiCarTaxiInformationInfo = (data) => http.get(carTaxiInformationIn
 export const apiCarTaxiMe = (data) => http.get(carTaxiMeUrl, data)
 export const apiCarTaxiIndex = (data) => http.get(carTaxiIndexUrl, data)
 export const apiCarTaxiAuth = (data) => http.get(carTaxiAuthUrl, data)
-export const apiCarTaxiComplainByMeList = (params, config = {}) => http.get(carTaxiComplainByMeListUrl, params, config)
+export const apiCarTaxiComplainByMeList = (data)  => http.get(carTaxiComplainByMeListUrl, data)
+export const apiCarTaxiExamination = (data) => http.get(carTaxiExaminationUrl, data)
+export const apiCarTaxiEmployeeExamination = (data) => http.get(carTaxiEmployeeExaminationUrl, data)
 
 /**
  * 使用custom写法
