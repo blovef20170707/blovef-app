@@ -5,7 +5,9 @@ module.exports = (vm) => {
         /* config 为默认全局配置*/	
         // config.baseURL = 'http://localhost:62688'; /* 根域名 */
 		// config.baseURL = 'https://crrt.blovef.com'; /* 根域名 */
-		config.baseURL = 'https://taxi.blovef.com'; /* 根域名 */
+		// config.baseURL = 'https://taxi.blovef.com'; /* 根域名 */
+		// config.baseURL = 'https://ms.blovef.com'; /* 根域名 */
+		config.baseURL = 'http://localhost:60080'; /* 根域名 */
         return config;
     })
 	
@@ -44,10 +46,10 @@ module.exports = (vm) => {
 	
 	// 响应拦截
 	uni.$u.http.interceptors.response.use((response) => { /* 对响应成功做点什么 可使用async await 做异步操作*/
-		console.log(response);
+		console.log("response:"+response);
 		const data = response.data
 		const custom = response.config?.custom
-		console.log(data);
+		console.log("data:"+data);
 		if(data.code === "200" && data.success == true){
 			if (custom?.toast) {
 				uni.$u.toast(data.message??"操作成功")
@@ -63,7 +65,7 @@ module.exports = (vm) => {
 	}, (response) => { 
 		// 对响应错误做点什么 （statusCode !== 200）会进入catch
 		// return Promise.reject(response)
-	
+			console.log(response);
 		if(response.statusCode === 401){
 			console.log("登录失效，请重新登录")
 			setTimeout(() => {

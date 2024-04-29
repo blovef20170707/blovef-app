@@ -5,8 +5,8 @@
 		</view>
 		<view class="logo">
 			<view class="png">
-				<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/car/logo.png"
-					width="200px" height="200px" mode="aspectFit">
+				<u--image src="https://tongda-ms-oss.obs.cn-north-4.myhuaweicloud.com/blovef/car/logo.png" width="200px"
+					height="200px" mode="aspectFit">
 				</u--image>
 			</view>
 		</view>
@@ -60,60 +60,46 @@
 			login() {
 				console.log("login")
 				let _this = this;
-				uni.getUserProfile({
-					desc: '授权获取你的昵称与头像',
-					success: function(resp) {
-						uni.login({
-							success: function(res) {
-								let code = res.code;
-								let nickName = resp.userInfo.nickName;
-								let avatarUrl = resp.userInfo.avatarUrl;
-								let country = resp.userInfo.country;
-								let province = resp.userInfo.province;
-								let city = resp.userInfo.city;
-								let gender = resp.userInfo.gender;
-								let params = {
-									"wx_code": code,
-									"login_type": 'WECHAT',
-									"app_system_key": global.appSystemKey,
-									"wx_nick_name": nickName,
-									"wx_avatar_url": avatarUrl,
-									"wx_gender": gender,
-									"wx_country": country,
-									"wx_province": province,
-									"wx_city": city
-								};
-								console.log(params);
-								apiWxLogin(params).then(data => {
-									console.log("成功登录", data)
-									uni.setStorageSync('token', data.token);
-									console.log(uni.getStorageSync('token'))
-									uni.$u.route({
-										type: 'switchTab',
-										url: '/pages/car/taxi/me'
-									});
-									console.log("成功登录完成")
-								}).catch(exception => {
-									console.log("exception", exception)
-								}).finally(res => {
+				uni.login({
+					success: function(res) {
+						let code = res.code;
+						let params = {
+							"wx_code": code,
+							"login_type": 'WECHAT',
+							"app_system_key": global.appSystemKey,
+							"wx_nick_name": '',
+							"wx_avatar_url": '',
+							"wx_gender": '',
+							"wx_country": '',
+							"wx_province": '',
+							"wx_city": ''
+						};
+						console.log(params);
+						apiWxLogin(params).then(data => {
+							console.log("成功登录", data)
+							uni.setStorageSync('token', data.token);
+							console.log(uni.getStorageSync('token'))
+							uni.$u.route({
+								type: 'switchTab',
+								url: '/pages/car/taxi/me'
+							});
+							console.log("成功登录完成")
+						}).catch(exception => {
+							console.log("exception", exception)
+						}).finally(res => {
 
-								})
-							},
-							fail: function() {
-
-							}
 						})
+						
+						uni.geshou(){
+							getphone();
+						}
 					},
 					fail: function() {
-						console.log("fail getUserProfile");
-						_this.$refs.uToast.show({
-							message: '登录失败,请允许授权',
-							type: 'error'
-						})
+
 					}
 				})
 			},
-		}
+		},
 	}
 </script>
 

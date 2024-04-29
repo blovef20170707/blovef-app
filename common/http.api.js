@@ -13,6 +13,11 @@ let getMessageUrl = '/sys/getMessage';
 let evaluationUrl = '/carSuit/evaluation';
 let evaluationReportUrl = '/carSuit/evaluationReport';
 let queryLoanArrayUrl = '/carSuit/queryLoan';
+
+//todo
+let toDoListUrl = '/car/taxi/todo/list';
+let toDoDoneUrl = '/car/taxi/todo/done';
+
 //crrt
 let crrtTrainLoginAuthUrl = '/crrt/train/login/auth';
 let crrtTrainLoginIndexUrl = '/crrt/train/login/index';
@@ -94,9 +99,12 @@ export const apiCarTaxiExaminationCreate = (params, config = {}) => http.post(ca
 export const apiCarTaxiExaminationTopic = (params, config = {}) => http.post(carTaxiExaminationTopicUrl, params, config)
 export const apiCarTaxiExaminationEnd = (params, config = {}) => http.post(carTaxiExaminationEndUrl, params, config)
 
+export const apiToDoDone = (params, config = {}) => http.post(toDoDoneUrl, params, config)
+
 // get请求 注意：get请求的配置等，都在第二个参数中，详见前面解释
 //base
 export const apiGetMenu = (data) => http.get(getMenuUrl, data)
+export const apiGetMessage = (data) => http.get(getMessageUrl, data)
 //crrt
 export const apiCrrtTrainLoginIndex = (data) => http.get(crrtTrainLoginIndexUrl, data)
 export const apiCrrtTrainIndex = (data) => http.get(crrtTrainIndexUrl, data)
@@ -120,8 +128,6 @@ export const apiCrrtTrainTraineeExamination = (data) => http.get(crrtTrainTraine
 export const apiCrrtTrainLoginAuth = (data) => http.get(crrtTrainLoginAuthUrl, data)
 export const apiCrrtTrainInformationInfo = (data) => http.get(crrtTrainInformationInfoUrl, data)
 
-
-export const apiGetMessage = (data) => http.get(getMessageUrl, data)
 //taxi
 export const apiCarTaxiComplainList = (data) => http.get(carTaxiComplainListUrl, data)
 export const apiCarTaxiComplainInfo = (data) => http.get(carTaxiComplainInfoUrl, data)
@@ -132,6 +138,7 @@ export const apiCarTaxiAuth = (data) => http.get(carTaxiAuthUrl, data)
 export const apiCarTaxiComplainByMeList = (data)  => http.get(carTaxiComplainByMeListUrl, data)
 export const apiCarTaxiExamination = (data) => http.get(carTaxiExaminationUrl, data)
 export const apiCarTaxiEmployeeExamination = (data) => http.get(carTaxiEmployeeExaminationUrl, data)
+export const apiToDoList = (data) => http.get(toDoListUrl, data)
 
 /**
  * 使用custom写法
